@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "oxc.oxc-vscode",
+    "astro-build.astro-vscode",
+    "prisma.prisma",
+    "bierner.markdown-preview-github-styles",
+    "yzhang.markdown-all-in-one",
+    "bradlc.vscode-tailwindcss",
+    "heybourn.headwind",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "yoavbls.pretty-ts-errors",
+    "qwtel.sqlite-viewer",
+    "alexcvzz.vscode-sqlite",
+  ]
+}

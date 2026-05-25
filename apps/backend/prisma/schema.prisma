@@ -1,0 +1,138 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  name      String
+  lastName  String
+  email     String   @unique
+  password  String
+  role      String   @default("USER") // SQLite no tiene Enums nativos; se maneja con strings o restricciones
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones
+  repositories Repository[]
+  issues       Issue[]
+  comments     Comment[]
+  pullRequests PullRequest[]
+  tokens       PersonalAccessToken[]
+
+  @@map("users")
+}
+
+model PersonalAccessToken {
+  id        String    @id @default(uuid())
+  name      String    // Nombre descriptivo del token (ej: "VSCode-Laptop")
+  token     String    @unique // El hash del token generado
+  scopes    String    // Permisos en formato string separado por comas (ej: "repo:read,repo:write")
+  userId    String
+  lastUsedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("personal_access_tokens")
+}
+
+model Repository {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  isPrivate   Boolean  @default(false)
+  localPath   String   // Ruta física absoluta en el servidor (ej: /git-storage/ownerId/repo.git)
+  ownerId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relaciones
+  owner        User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  issues       Issue[]
+  pullRequests PullRequest[]
+  webhooks     Webhook[]
+
+  // Garantiza que un mismo usuario no tenga dos repositorios con el mismo nombre
+  @@unique([ownerId, name])
+  @@map("repositories")
+}
+
+model Issue {
+  id           String   @id @default(uuid())
+  number       Int      // El número secuencial del issue dentro del repo (ej: #1, #2)
+  title        String
+  body         String?
+  status       String   @default("OPEN") // OPEN, CLOSED
+  repositoryId String
+  authorId     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relaciones
+  repository Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+  author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments   Comment[]
+
+  @@unique([repositoryId, number])
+  @@map("issues")
+}
+
+model PullRequest {
+  id           String   @id @default(uuid())
+  number       Int      // El número secuencial del PR dentro del repo (ej: #1, #2)
+  title        String
+  body         String?  // Aquí soportarás tu tag personalizado <Code title="..." lang="..."></Code>
+  status       String   @default("OPEN") // OPEN, MERGED, CLOSED
+  sourceBranch String   // Rama de donde vienen los cambios (ej: "feature-login")
+  targetBranch String   // Rama a donde se quiere fusionar (ej: "main")
+  repositoryId String
+  authorId     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relaciones
+  repository Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+  author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments   Comment[]
+
+  @@unique([repositoryId, number])
+  @@map("pull_requests")
+}
+
+model Comment {
+  id            String   @id @default(uuid())
+  body          String   // Texto o Markdown del comentario
+  authorId      String
+  issueId       String?
+  pullRequestId String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relaciones
+  author      User         @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  issue       Issue?       @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  pullRequest PullRequest? @relation(fields: [pullRequestId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+model Webhook {
+  id           String   @id @default(uuid())
+  url          String   // URL del servidor externo que recibirá el POST (ej: Discord Webhook, Jenkins)
+  secret       String?  // Clave criptográfica para firmar el payload (X-Hub-Signature)
+  events       String   // Eventos activos serializados (ej: "push,pull_request,issues")
+  isActive     Boolean  @default(true)
+  repositoryId String
+  createdAt    DateTime @default(now())
+
+  repository Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@map("webhooks")
+}

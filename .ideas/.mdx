@@ -1,0 +1,175 @@
+🚀 Arquitectura Técnica de la Solución
+
+Para procesar el cuerpo de la descripción de un Pull Request o Issue (guardado como un string en PostgreSQL) y transformarlo en esa interfaz interactiva, utilizaremos el ecosistema estándar de Markdown en el ecosistema de JavaScript: Remark (para parsear la sintaxis) y Rehype (para renderizar el HTML).
+
+Dado que buscas un enfoque minimalista y de alto rendimiento, usaremos Shiki (el motor de resaltado de sintaxis basado en árboles de tokens que ya usa Astro por debajo).
+
+1. El Componente React (CodeBlock.tsx)
+
+```ts
+import React from 'react'
+
+interface CodeBlockProps {
+  readonly title: string
+  readonly lang: string
+  readonly highlightedHtml: string // El HTML con los tokens de color ya procesados por Shiki
+}
+
+export const CodeBlock: React.FC<CodeBlockProps> = ({ title, lang, highlightedHtml }) => {
+  return (
+    <div className='w-full my-4 overflow-hidden rounded-md border border-[#30363d] bg-[#0d1117] font-sans'>
+      {/* Barra superior de la ventana */}
+      <div className='flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-[#30363d]'>
+        <span className='text-xs font-mono text-[#7d8590]'>{title}</span>
+        <span className='text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-[#30363d] text-[#e6edf3] tracking-wider'>
+          {lang}
+        </span>
+      </div>
+
+      {/* Contenedor del código estructurado */}
+      <div
+        className='p-4 overflow-x-auto font-mono text-sm leading-6 select-text'
+        dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+      />
+    </div>
+  )
+}
+```
+
+2. El Parser en el Servidor (Estrategia Astro / Backend)
+
+Cuando el frontend de Astro solicita la información del Pull Request a tu API en NestJS, recibes el string crudo con las etiquetas <Code>.
+
+Podemos crear una utilidad de procesamiento usando remark-rehype y un plugin personalizado para interceptar la etiqueta <Code>, extraer sus propiedades (title, lang) y pre-renderizar el resaltado de sintaxis con Shiki en el servidor para que el cliente reciba HTML puro y veloz.
+
+Implementación del Procesador de Markdown (markdown.ts)
+
+
+```ts
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
+import { visit } from 'unist-util-visit'
+import { createHighlighter } from 'shiki'
+
+// Inicializamos Shiki con el tema nativo oscuro de GitHub
+const highlighter = await createHighlighter({
+  themes: ['github-dark'],
+  langs: ['typescript', 'javascript', 'tsx', 'json', 'yaml', 'bash']
+})
+
+/**
+ * Custom transformer to scan the HTML tree and replace <code-block> elements
+ * with the fully highlighted code and custom file tab layout.
+ */
+function rehypeCodeCustomizer() {
+  return (tree: any) => {
+    visit(tree, 'element', (node: any) => {
+      // Interceptamos nuestra etiqueta personalizada (recomiendo usar minúsculas en el parser HTML)
+      if (node.tagName === 'code-block') {
+        const title = node.properties.title || 'Untitled'
+        const lang = node.properties.lang || 'txt'
+
+        // Extraemos el texto crudo dentro de la etiqueta
+        const rawCode = node.children[0]?.value || ''
+
+        // Generamos los tokens de color con Shiki
+        const highlightedHtml = highlighter.codeToHtml(rawCode, {
+          lang,
+          theme: 'github-dark'
+        })
+
+        // Transformamos el nodo en la estructura DOM exacta de nuestra ventana minimalista
+        node.tagName = 'div'
+        node.properties = { className: ['w-full', 'my-4', 'rounded-md', 'border', 'border-[#30363d]', 'bg-[#0d1117]', 'overflow-hidden'] }
+        node.children = [
+          {
+            type: 'element',
+            tagName: 'div',
+            properties: { className: ['flex', 'items-center', 'justify-between', 'px-4', 'py-2', 'bg-[#161b22]', 'border-b', 'border-[#30363d]'] },
+            children: [
+              { type: 'element', tagName: 'span', properties: { className: ['text-xs', 'font-mono', 'text-[#7d8590]'] }, children: [{ type: 'text', value: title }] },
+              { type: 'element', tagName: 'span', properties: { className: ['text-[10px]', 'uppercase', 'font-bold', 'px-1.5', 'py-0.5', 'rounded', 'bg-[#30363d]', 'text-[#e6edf3]'] }, children: [{ type: 'text', value: lang }] }
+            ]
+          },
+          {
+            type: 'element',
+            tagName: 'div',
+            properties: { className: ['p-4', 'overflow-x-auto', 'font-mono', 'text-sm', 'leading-6'] },
+            children: [{ type: 'raw', value: highlightedHtml }]
+          }
+        ]
+      }
+    })
+  }
+}
+
+/**
+ * Compiles a raw description markdown string into safe, beautifully highlighted HTML.
+ */
+export async function renderDescription(rawMarkdown: string): Promise<string> {
+  // Pequeña normalización: permitimos que escriban <Code> pero lo procesamos como <code-block>
+  const normalizedMarkdown = rawMarkdown
+    .replace(/<Code/g, '<code-block')
+    .replace(/<\/Code>/g, '</code-block>')
+
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkRehype, { allowDangerousHtml: true }) // Permite procesar las etiquetas personalizadas
+    .use(rehypeCodeCustomizer)
+    .use(rehypeStringify, { allowDangerousHtml: true })
+    .process(normalizedMarkdown)
+
+  return String(result)
+}
+```
+
+3. Uso en la Vista de Astro ([pr].astro)
+Gracias a que todo el procesamiento pesado de Shiki y el tipado se resuelve en el servidor, tu página de Astro para renderizar el Pull Request se mantiene 100% estática, limpia y sin enviar un solo byte de JavaScript innecesario al cliente.
+
+```astro
+---
+// src/pages/repos/[owner]/[repo]/pulls/[id].astro
+import Layout from '~/layouts/Layout.astro';
+import { renderDescription } from '~/utils/markdown';
+
+// 1. Recuperas la descripción en Markdown desde tu backend NestJS
+const prDescriptionFromApi = `
+Great initiative. I looked over the memoization, and it mostly looks solid.
+
+<Code title="VirtualScrollContainer.tsx" lang="ts">
+const itemHeight = ref.current?.clientHeight || 40; // Fallback
+const itemHeight = useMemo(() => calculateAverageHeight(items), [items]);
+</Code>
+
+Relying on the ref immediately might cause layout thrashing.
+`;
+
+// 2. Procesas el contenido en el servidor de Astro antes de renderizar
+const htmlContent = await renderDescription(prDescriptionFromApi);
+---
+
+<Layout title="Pull Request | Vertex">
+  <main className="max-w-4xl mx-auto p-6 bg-[#0d1117] text-[#e6edf3]">
+
+    <div className="border border-[#30363d] rounded-md bg-[#0d1117] overflow-hidden">
+      <div className="px-4 py-2 bg-[#161b22] border-b border-[#30363d] text-sm text-[#7d8590]">
+        <strong className="text-[#e6edf3]">arivera</strong> commented yesterday
+      </div>
+
+      {/* Inyección del HTML final renderizado */}
+      <div className="p-4 prose prose-invert max-w-none text-[#e6edf3]">
+        <Fragment set:html={htmlContent} />
+      </div>
+    </div>
+
+  </main>
+</Layout>
+```
+
+UX Superior: Los desarrolladores pueden nombrar los archivos directamente dentro de las discusiones de código sin tener que recurrir a trucos raros de texto plano en negrita arriba del bloque clásico de Markdown.
+
+Cero penalización en el Bundle: Al realizar la transformación del árbol sintáctico (AST) en el servidor de Astro, Shiki y el parser no viajan al navegador. El cliente descarga únicamente HTML semántico hiper-optimizado.
+
+Escalabilidad: Siguiendo este mismo patrón con unified, el día de mañana puedes agregar componentes personalizados para embeber Issues (<Issue id="42" />), perfiles de usuarios o incluso previsualizaciones interactivas de código.

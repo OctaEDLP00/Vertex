@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #2f81f7;
+  --color-canvas-base: #0d1117;
+  --color-text-secondary: #7d8590;
+  --color-text-primary: #e6edf3;
+  --color-border-subtle: #30363d;
+  --color-surface-variant: #161b22;
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
