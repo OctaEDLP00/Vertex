@@ -1,34 +1,52 @@
 {
-  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit"
-  },
-  "files.associations": {
-    "**/*.module.ts": "typescript",
-    "**/*.controller.ts": "typescript",
-    "**/*.service.ts": "typescript",
-    "**/*.repository.ts": "typescript",
-    "**/*.decorator.ts": "typescript",
-    "**/*.guard.ts": "typescript",
-    "**/*.interceptor.ts": "typescript",
-    "**/*.pipe.ts": "typescript",
-    "**/*.resolver.ts": "typescript",
-    "**/*.gateway.ts": "typescript",
-    "**/*.filter.ts": "typescript",
-    "**/*.middleware.ts": "typescript",
-    "**/*.dto.ts": "typescript",
-    "**/*.entity.ts": "typescript",
-    "**/*.enum.ts": "typescript",
-    "**/*.interface.ts": "typescript",
+    "source.fixAll.eslint": "explicit"
   },
   "json.validate.enable": true,
+  "files.associations": {
+    "*.mdx": "markdown",
+    "*.css": "tailwindcss",
+    "*.svg": "xml"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "editor.formatOnSave": true,
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false
+  },
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.run": "onSave",
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "astro"],
+  "prettier.enable": true,
+  "prettier.documentSelectors": ["**/*.astro"],
+  "css.customData": [".vscode/tailwindcss.json"],
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "github.copilot.nextEditSuggestions.enabled": true,
   "chat.agentSkillsLocations": {
@@ -38,5 +56,15 @@
     "~/.copilot/skills": true,
     "~/.agents/skills": true,
     "~/.claude/skills": true
-  }
+  },
+  "[plaintext]": {
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "bracketLens.mode": "manual",
+    "files.trimFinalNewlines": false,
+    "prettier.endOfLine": "crlf"
+  },
+  "editor.wordWrap": "on",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": true,
 }

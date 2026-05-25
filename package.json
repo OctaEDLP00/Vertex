@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "pnpm --parallel dev",
     "lint": "pnpm --parallel lint",
+    "lint:fix": "pnpm --parallel lint",
     "fmt": "pnpm --parallel fmt",
+    "fmt:check": "pnpm --parallel fmt",
     "build": "pnpm --filter backend build && pnpm --filter frontend build",
     "dev:frontend": "pnpm --filter frontend dev",
     "build:frontend": "pnpm --filter frontend build",
@@ -23,8 +25,24 @@
     "db:seed": "pnpm --filter backend db:seed"
   },
   "devDependencies": {
-    "oxlint": "1.66.0",
-    "oxfmt": "0.51.0"
+    "@eslint/js": "10.0.1",
+    "@typescript-eslint/eslint-plugin": "8.59.4",
+    "@typescript-eslint/parser": "",
+    "eslint-plugin-astro": "1.7.0",
+    "eslint-config-astro": "1.0.8",
+    "astro-eslint-parser": "1.4.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.2",
+    "eslint": "10.4.0",
+    "globals": "17.6.0",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-jsdoc": "1.8.0",
+    "prettier": "3.8.3",
+    "typescript-eslint": "8.59.4",
+    "typescript": "6.0.3"
   },
   "packageManager": "pnpm@11.3.0"
 }

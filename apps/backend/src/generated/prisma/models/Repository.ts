@@ -139,11 +139,11 @@ export type RepositoryAggregateArgs<
 }
 
 export type GetRepositoryAggregateType<T extends RepositoryAggregateArgs> = {
-  [P in keyof T & keyof AggregateRepository]: P extends '_count' | 'count'
-    ? T[P] extends true
-      ? number
-      : Prisma.GetScalarType<T[P], AggregateRepository[P]>
+  [P in keyof T & keyof AggregateRepository]: P extends '_count' | 'count' ?
+    T[P] extends true ?
+      number
     : Prisma.GetScalarType<T[P], AggregateRepository[P]>
+  : Prisma.GetScalarType<T[P], AggregateRepository[P]>
 }
 
 export type RepositoryGroupByArgs<
@@ -179,11 +179,11 @@ export type RepositoryGroupByOutputType = {
 export type GetRepositoryGroupByPayload<T extends RepositoryGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<RepositoryGroupByOutputType, T['by']> & {
-      [P in keyof T & keyof RepositoryGroupByOutputType]: P extends '_count'
-        ? T[P] extends boolean
-          ? number
-          : Prisma.GetScalarType<T[P], RepositoryGroupByOutputType[P]>
+      [P in keyof T & keyof RepositoryGroupByOutputType]: P extends '_count' ?
+        T[P] extends boolean ?
+          number
         : Prisma.GetScalarType<T[P], RepositoryGroupByOutputType[P]>
+      : Prisma.GetScalarType<T[P], RepositoryGroupByOutputType[P]>
     }
   >
 >
@@ -1148,7 +1148,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryFindUniqueArgs} args - Arguments to find a Repository
    */
   findUnique<T extends RepositoryFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, RepositoryFindUniqueArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, RepositoryFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1176,7 +1176,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryFindUniqueOrThrowArgs} args - Arguments to find a Repository
    */
   findUniqueOrThrow<T extends RepositoryFindUniqueOrThrowArgs>(
-    args: Prisma.SelectSubset<T, RepositoryFindUniqueOrThrowArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, RepositoryFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1204,7 +1204,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryFindFirstArgs} args - Arguments to find a Repository
    */
   findFirst<T extends RepositoryFindFirstArgs>(
-    args?: Prisma.SelectSubset<T, RepositoryFindFirstArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, RepositoryFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1233,7 +1233,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryFindFirstOrThrowArgs} args - Arguments to find a Repository
    */
   findFirstOrThrow<T extends RepositoryFindFirstOrThrowArgs>(
-    args?: Prisma.SelectSubset<T, RepositoryFindFirstOrThrowArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, RepositoryFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1263,7 +1263,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryFindManyArgs} args - Arguments to filter and select certain fields only.
    */
   findMany<T extends RepositoryFindManyArgs>(
-    args?: Prisma.SelectSubset<T, RepositoryFindManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, RepositoryFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1287,7 +1287,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryCreateArgs} args - Arguments to create a Repository.
    */
   create<T extends RepositoryCreateArgs>(
-    args: Prisma.SelectSubset<T, RepositoryCreateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, RepositoryCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1314,7 +1314,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryCreateManyArgs} args - Arguments to create many Repositories.
    */
   createMany<T extends RepositoryCreateManyArgs>(
-    args?: Prisma.SelectSubset<T, RepositoryCreateManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, RepositoryCreateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1341,7 +1341,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryCreateManyAndReturnArgs} args - Arguments to create many Repositories.
    */
   createManyAndReturn<T extends RepositoryCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, RepositoryCreateManyAndReturnArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, RepositoryCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1365,7 +1365,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryDeleteArgs} args - Arguments to delete one Repository.
    */
   delete<T extends RepositoryDeleteArgs>(
-    args: Prisma.SelectSubset<T, RepositoryDeleteArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, RepositoryDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1395,7 +1395,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryUpdateArgs} args - Arguments to update one Repository.
    */
   update<T extends RepositoryUpdateArgs>(
-    args: Prisma.SelectSubset<T, RepositoryUpdateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, RepositoryUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1422,7 +1422,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryDeleteManyArgs} args - Arguments to filter Repositories to delete.
    */
   deleteMany<T extends RepositoryDeleteManyArgs>(
-    args?: Prisma.SelectSubset<T, RepositoryDeleteManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, RepositoryDeleteManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1443,7 +1443,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryUpdateManyArgs} args - Arguments to update one or more rows.
    */
   updateMany<T extends RepositoryUpdateManyArgs>(
-    args: Prisma.SelectSubset<T, RepositoryUpdateManyArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, RepositoryUpdateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1476,7 +1476,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryUpdateManyAndReturnArgs} args - Arguments to update many Repositories.
    */
   updateManyAndReturn<T extends RepositoryUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, RepositoryUpdateManyAndReturnArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, RepositoryUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1506,7 +1506,7 @@ export interface RepositoryDelegate<
    * @param {RepositoryUpsertArgs} args - Arguments to update or create a Repository.
    */
   upsert<T extends RepositoryUpsertArgs>(
-    args: Prisma.SelectSubset<T, RepositoryUpsertArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, RepositoryUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     runtime.Types.Result.GetResult<
       Prisma.$RepositoryPayload<ExtArgs>,
@@ -1534,13 +1534,13 @@ export interface RepositoryDelegate<
    * @param {RepositoryCountArgs} args - Arguments to filter Repositories to count.
    */
   count<T extends RepositoryCountArgs>(
-    args?: Prisma.Subset<T, RepositoryCountArgs>
+    args?: Prisma.Subset<T, RepositoryCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<'select', any>
-      ? T['select'] extends true
-        ? number
-        : Prisma.GetScalarType<T['select'], RepositoryCountAggregateOutputType>
-      : number
+    T extends runtime.Types.Utils.Record<'select', any> ?
+      T['select'] extends true ?
+        number
+      : Prisma.GetScalarType<T['select'], RepositoryCountAggregateOutputType>
+    : number
   >
 
   /**
@@ -1570,7 +1570,7 @@ export interface RepositoryDelegate<
    *   on what fields.
    */
   aggregate<T extends RepositoryAggregateArgs>(
-    args: Prisma.Subset<T, RepositoryAggregateArgs>
+    args: Prisma.Subset<T, RepositoryAggregateArgs>,
   ): Prisma.PrismaPromise<GetRepositoryAggregateType<T>>
 
   /**
@@ -1597,9 +1597,9 @@ export interface RepositoryDelegate<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
-    OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: RepositoryGroupByArgs['orderBy'] }
-      : { orderBy?: RepositoryGroupByArgs['orderBy'] },
+    OrderByArg extends Prisma.True extends HasSelectOrTake ?
+      { orderBy: RepositoryGroupByArgs['orderBy'] }
+    : { orderBy?: RepositoryGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
       Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
@@ -1608,45 +1608,38 @@ export interface RepositoryDelegate<
     HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
     ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
-    InputErrors extends ByEmpty extends Prisma.True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends Prisma.False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-                ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
-          }[HavingFields]
-        : 'take' extends Prisma.Keys<T>
-          ? 'orderBy' extends Prisma.Keys<T>
-            ? ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields]
-            : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : 'skip' extends Prisma.Keys<T>
-            ? 'orderBy' extends Prisma.Keys<T>
-              ? ByValid extends Prisma.True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "skip", you also need to provide "orderBy"'
-            : ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields],
+    InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.`
+    : HavingValid extends Prisma.False ?
+      {
+        [P in HavingFields]: P extends ByFields ? never
+        : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+        : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+      }[HavingFields]
+    : 'take' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "take", you also need to provide "orderBy"'
+    : 'skip' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "skip", you also need to provide "orderBy"'
+    : ByValid extends Prisma.True ? {}
+    : {
+        [P in OrderFields]: P extends ByFields ? never
+        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+      }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, RepositoryGroupByArgs, OrderByArg> & InputErrors
+    args: Prisma.SubsetIntersection<T, RepositoryGroupByArgs, OrderByArg> & InputErrors,
   ): {} extends InputErrors ? GetRepositoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /** Fields of the Repository model */
   readonly fields: RepositoryFieldRefs
@@ -1665,7 +1658,7 @@ export interface Prisma__RepositoryClient<
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<
         Prisma.$UserPayload<ExtArgs>,
@@ -1679,7 +1672,7 @@ export interface Prisma__RepositoryClient<
     GlobalOmitOptions
   >
   issues<T extends Prisma.Repository$issuesArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Repository$issuesArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.Repository$issuesArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$IssuePayload<ExtArgs>,
@@ -1690,7 +1683,7 @@ export interface Prisma__RepositoryClient<
     | Null
   >
   pullRequests<T extends Prisma.Repository$pullRequestsArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Repository$pullRequestsArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.Repository$pullRequestsArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$PullRequestPayload<ExtArgs>,
@@ -1701,7 +1694,7 @@ export interface Prisma__RepositoryClient<
     | Null
   >
   webhooks<T extends Prisma.Repository$webhooksArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Repository$webhooksArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.Repository$webhooksArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$WebhookPayload<ExtArgs>,
@@ -1720,7 +1713,7 @@ export interface Prisma__RepositoryClient<
    */
   then<TResult1 = T, TResult2 = never>(
     onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -1729,7 +1722,7 @@ export interface Prisma__RepositoryClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The

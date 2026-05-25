@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "oxc.oxc-vscode",
     "astro-build.astro-vscode",
     "prisma.prisma",
     "bierner.markdown-preview-github-styles",
@@ -12,5 +11,7 @@
     "yoavbls.pretty-ts-errors",
     "qwtel.sqlite-viewer",
     "alexcvzz.vscode-sqlite",
+    "spences10.robots-txt",
+    "dbaeumer.vscode-eslint",
   ]
 }

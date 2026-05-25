@@ -1,8 +1,0 @@
-{
-  "$schema": "../../node_modules/oxlint/configuration_schema.json",
-  "extends": ["../../.oxlintrc.json"],
-  "plugins": [],
-  "rules": {
-    "no-empty-function": "off" // Común en constructores de NestJS para inyección
-  }
-}

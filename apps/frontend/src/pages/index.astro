@@ -1,11 +1,443 @@
----
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+<!doctype html>
+<html
+  class='dark'
+  lang='en'
+>
+  <head>
+    <meta charset='utf-8' />
+    <meta
+      content='width=device-width, initial-scale=1.0'
+      name='viewport'
+    />
+    <title>Vertex - The Home of Code. Redefined.</title>
+    <link
+      href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap'
+      rel='stylesheet'
+    />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap'
+      rel='stylesheet'
+    />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap'
+      rel='stylesheet'
+    />
+    <style>
+      body {
+        background-color: #0d1117;
+        color: #e6edf3;
+      }
+      .text-accent-blue {
+        color: #2f81f7;
+      }
+      .bg-accent-blue {
+        background-color: #2f81f7;
+      }
+      .border-accent-blue {
+        border-color: #2f81f7;
+      }
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
----
+      .hero-perspective {
+        perspective: 1000px;
+      }
+      .hero-card {
+        transform: rotateX(5deg) rotateY(-5deg);
+        transition: transform 0.5s ease;
+      }
+      .hero-card:hover {
+        transform: rotateX(0deg) rotateY(0deg);
+      }
+    </style>
+  </head>
+  <body class='font-body-md text-body-md antialiased min-h-screen flex flex-col'>
+    <!-- Header: Minimal TopNavBar -->
+    <header
+      class='bg-canvas-base dark:bg-canvas-base text-primary dark:text-primary font-body-md text-body-md docked full-width top-0 border-b border-border-subtle flat no shadows flex flex-col justify-center sticky z-50'
+    >
+      <div class='flex items-center justify-between w-full px-container-padding h-row-height-md'>
+        <!-- Brand -->
+        <div class='flex items-center gap-4'>
+          <div
+            class='font-headline-md text-headline-md font-bold text-text-primary flex items-center gap-2'
+          >
+            <span
+              class='material-symbols-outlined text-accent-blue'
+              data-icon='polyline'
+              style="font-variation-settings: 'FILL' 1;"
+              >polyline</span
+            >
+            Vertex
+          </div>
+          <!-- Navigation -->
+          <nav class='hidden md:flex items-center gap-6 ml-6'>
+            <a
+              class='text-text-primary font-bold hover:text-primary-fixed-dim transition-colors duration-0'
+              href='#'
+              >Features</a
+            >
+            <a
+              class='text-text-secondary hover:text-primary-fixed-dim transition-colors duration-0'
+              href='#'
+              >Enterprise</a
+            >
+            <a
+              class='text-text-secondary hover:text-primary-fixed-dim transition-colors duration-0'
+              href='#'
+              >Pricing</a
+            >
+            <a
+              class='text-text-secondary hover:text-primary-fixed-dim transition-colors duration-0'
+              href='#'
+              >Explore</a
+            >
+          </nav>
+        </div>
+        <!-- Actions -->
+        <div class='flex items-center gap-4'>
+          <span
+            class='material-symbols-outlined text-text-secondary hover:text-text-primary cursor-pointer transition-colors duration-0'
+            data-icon='search'
+            >search</span
+          >
+          <span
+            class='material-symbols-outlined text-text-secondary hover:text-text-primary cursor-pointer transition-colors duration-0'
+            data-icon='notifications'
+            >notifications</span
+          >
+          <img
+            alt='User profile'
+            class='w-6 h-6 rounded-full border border-border-subtle cursor-pointer'
+            src='https://lh3.googleusercontent.com/aida-public/AB6AXuCAncSlu3f0l193lEUrg3osHpWzrGQ-VSH_hi5cwH02UA3NSwV0pLJ03ejlvGe8UbahSdQTSmkX7l80_kdQN4sltzRrr2IEqnIyIBK361C11D4-UmobFY4nlq161x_btziXt0pFyjWDQmN1MjqnkOTQAK_h7nyu2y2UlX_UIKetaTwcuhrRqa2uOCoZtwaoJZxBV-Mqb0JLkze-Pkh8mWTYYghbwXk__hTQxlR_CrpIKt26oCRiAww--PO9uhdCaOg9SdomVwXn_A'
+          />
+        </div>
+      </div>
+    </header>
+    <!-- Main Content -->
+    <main class='grow flex flex-col'>
+      <!-- Hero Section -->
+      <section
+        class='flex flex-col md:flex-row items-center justify-between px-container-padding py-24 md:py-32 max-w-7xl mx-auto w-full gap-12'
+      >
+        <div class='flex-1 space-y-6 z-10'>
+          <h1
+            class='font-headline-lg text-[48px] leading-[1.1] font-bold text-text-primary tracking-tight'
+          >
+            The Home of Code.<br />
+            <span class='text-accent-blue'>Redefined.</span>
+          </h1>
+          <p class='font-body-lg text-body-lg text-text-secondary max-w-xl'>
+            A lightning-fast, radically minimalist Git platform built for the modern developer.
+            Hosting, collaboration, and deployment without the clutter.
+          </p>
+          <div class='flex items-center gap-4 pt-4'>
+            <button
+              class='bg-accent-blue text-canvas-base px-6 py-2 rounded font-semibold hover:bg-opacity-90 transition-none'
+            >
+              Get Started
+            </button>
+            <button
+              class='bg-transparent border border-border-subtle text-text-primary px-6 py-2 rounded font-semibold hover:bg-surface transition-none'
+            >
+              View Documentation
+            </button>
+          </div>
+        </div>
+        <!-- Minimalist Repo Preview Visual -->
+        <div class='flex-1 hero-perspective w-full max-w-2xl hidden md:block'>
+          <div
+            class='hero-card bg-surface border border-border-subtle rounded-lg shadow-2xl overflow-hidden flex flex-col'
+          >
+            <!-- Fake TopAppBar for Repo -->
+            <div
+              class='bg-canvas-base border-b border-border-subtle px-4 py-3 flex items-center justify-between'
+            >
+              <div class='flex items-center gap-2'>
+                <span
+                  class='material-symbols-outlined text-text-secondary text-sm'
+                  data-icon='book'
+                  >book</span
+                >
+                <span class='font-headline-md text-headline-md text-text-primary'
+                  >vertex-core / engine</span
+                >
+              </div>
+              <div class='flex items-center gap-2'>
+                <span
+                  class='text-text-secondary border border-border-subtle rounded px-2 py-1 text-xs'
+                  >Public</span
+                >
+              </div>
+            </div>
+            <!-- Fake SideNav + Content Layout -->
+            <div class='flex flex-row grow'>
+              <!-- Content Area (File Explorer snippet) -->
+              <div class='grow p-4 bg-canvas-base'>
+                <div class='border border-border-subtle rounded-md overflow-hidden'>
+                  <div
+                    class='bg-surface px-4 py-2 border-b border-border-subtle flex justify-between items-center text-sm text-text-secondary'
+                  >
+                    <div class='flex items-center gap-2'>
+                      <img
+                        alt='author'
+                        class='w-5 h-5 rounded-full'
+                        src='https://lh3.googleusercontent.com/aida-public/AB6AXuCjUTGwmqk_Rbk9tY3Ls4eB1RACNk3qTnKxnQES4HdmvfM9aTWb4Z4tXdJSwLWy8zf5cyVp3YoBcX3brCrLxkXC3n2BWQkksKrmBiUuY6B-4YjU_jHvMrrSrRNWwlS1X5WZyH3OPx9AKRO7sCWGbSnHLGFMRwMQdSs32WtQ3LydaiQPZs0bBzK01l3mapBgX404tuZup78L0kHjf9ALDcPkAHCGzOqPrr63hxfLYPjEVL8WWs64k42Vbf0YdE5w6KpTkLCNXItOoQ'
+                      />
+                      <span class='font-semibold text-text-primary'>alex-dev</span>
+                      <span>Update workflow configuration</span>
+                    </div>
+                    <span class='font-code-sm text-code-sm'>a1b2c3d</span>
+                  </div>
+                  <table class='w-full table-fixed text-left border-collapse'>
+                    <tbody>
+                      <tr
+                        class='border-b border-border-subtle hover:bg-surface transition-none cursor-pointer'
+                      >
+                        <td class='w-10 px-4 py-2 text-text-secondary'
+                          ><span
+                            class='material-symbols-outlined text-sm'
+                            data-icon='folder'
+                            style="font-variation-settings: 'FILL' 1;"
+                            >folder</span
+                          ></td
+                        >
+                        <td
+                          class='px-2 py-2 text-text-primary font-code-md text-code-md truncate hover:text-accent-blue'
+                          >src/components</td
+                        >
+                        <td class='px-2 py-2 text-text-secondary text-sm truncate text-right'
+                          >Refactor shared UI</td
+                        >
+                      </tr>
+                      <tr
+                        class='border-b border-border-subtle hover:bg-surface transition-none cursor-pointer'
+                      >
+                        <td class='w-10 px-4 py-2 text-text-secondary'
+                          ><span
+                            class='material-symbols-outlined text-sm'
+                            data-icon='folder'
+                            style="font-variation-settings: 'FILL' 1;"
+                            >folder</span
+                          ></td
+                        >
+                        <td
+                          class='px-2 py-2 text-text-primary font-code-md text-code-md truncate hover:text-accent-blue'
+                          >tests</td
+                        >
+                        <td class='px-2 py-2 text-text-secondary text-sm truncate text-right'
+                          >Add unit tests</td
+                        >
+                      </tr>
+                      <tr class='hover:bg-surface transition-none cursor-pointer'>
+                        <td class='w-10 px-4 py-2 text-text-secondary'
+                          ><span
+                            class='material-symbols-outlined text-sm'
+                            data-icon='description'
+                            >description</span
+                          ></td
+                        >
+                        <td
+                          class='px-2 py-2 text-text-primary font-code-md text-code-md truncate hover:text-accent-blue'
+                          >README.md</td
+                        >
+                        <td class='px-2 py-2 text-text-secondary text-sm truncate text-right'
+                          >Update docs</td
+                        >
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Stats Line -->
+      <section class='border-y border-border-subtle bg-surface-dim'>
+        <div
+          class='max-w-7xl mx-auto px-container-padding py-8 flex flex-wrap justify-center md:justify-around gap-8 text-center'
+        >
+          <div>
+            <div class='font-headline-lg text-headline-lg text-text-primary mb-1'>10M+</div>
+            <div class='text-text-secondary text-sm font-label-caps uppercase tracking-wider'>
+              Commits
+            </div>
+          </div>
+          <div>
+            <div class='font-headline-lg text-headline-lg text-text-primary mb-1'>500k+</div>
+            <div class='text-text-secondary text-sm font-label-caps uppercase tracking-wider'>
+              Developers
+            </div>
+          </div>
+          <div>
+            <div class='font-headline-lg text-headline-lg text-text-primary mb-1'>99.99%</div>
+            <div class='text-text-secondary text-sm font-label-caps uppercase tracking-wider'>
+              Uptime
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Feature Grid (3 Columns) -->
+      <section class='px-container-padding py-24 max-w-7xl mx-auto w-full'>
+        <div class='grid grid-cols-1 md:grid-cols-3 gap-12'>
+          <!-- Feature 1 -->
+          <div class='flex flex-col gap-4'>
+            <div
+              class='w-12 h-12 rounded bg-surface border border-border-subtle flex items-center justify-center text-text-primary'
+            >
+              <span
+                class='material-symbols-outlined'
+                data-icon='speed'
+                >speed</span
+              >
+            </div>
+            <h3 class='font-headline-md text-headline-md text-text-primary'>
+              Ultra-Fast Repositories
+            </h3>
+            <p class='text-text-secondary'>
+              Zero-latency hosting with a focus on performance. No bloat, just pure speed for your
+              Git operations.
+            </p>
+          </div>
+          <!-- Feature 2 -->
+          <div class='flex flex-col gap-4'>
+            <div
+              class='w-12 h-12 rounded bg-surface border border-border-subtle flex items-center justify-center text-text-primary'
+            >
+              <span
+                class='material-symbols-outlined'
+                data-icon='merge_type'
+                >merge_type</span
+              >
+            </div>
+            <h3 class='font-headline-md text-headline-md text-text-primary'>
+              Intuitive Code Review
+            </h3>
+            <p class='text-text-secondary'>
+              Collaborative workflows that get out of your way. Clean diffs, inline comments, and
+              streamlined approvals.
+            </p>
+          </div>
+          <!-- Feature 3 -->
+          <div class='flex flex-col gap-4'>
+            <div
+              class='w-12 h-12 rounded bg-surface border border-border-subtle flex items-center justify-center text-text-primary'
+            >
+              <span
+                class='material-symbols-outlined'
+                data-icon='rocket_launch'
+                >rocket_launch</span
+              >
+            </div>
+            <h3 class='font-headline-md text-headline-md text-text-primary'>
+              Astro-Powered Platform
+            </h3>
+            <p class='text-text-secondary'>
+              Built with Astro and React for an instantaneous UI. Experience a platform that feels
+              like a native desktop app.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer class='border-t border-border-subtle bg-canvas-base py-12 mt-auto'>
+      <div
+        class='max-w-7xl mx-auto px-container-padding flex flex-col md:flex-row justify-between items-center gap-6'
+      >
+        <div class='flex items-center gap-2 text-text-secondary'>
+          <span
+            class='material-symbols-outlined text-sm'
+            data-icon='polyline'
+            style="font-variation-settings: 'FILL' 1;"
+            >polyline</span
+          >
+          <span>© 2024 Vertex Inc. All rights reserved.</span>
+        </div>
+        <div class='flex gap-6 text-sm text-text-secondary'>
+          <a
+            class='hover:text-text-primary transition-colors duration-0'
+            href='#'
+            >Terms</a
+          >
+          <a
+            class='hover:text-text-primary transition-colors duration-0'
+            href='#'
+            >Privacy</a
+          >
+          <a
+            class='hover:text-text-primary transition-colors duration-0'
+            href='#'
+            >Security</a
+          >
+          <a
+            class='hover:text-text-primary transition-colors duration-0'
+            href='#'
+            >Status</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
 
-<Layout>
-	<Welcome />
-</Layout>
+<style>
+  @import 'tailwindcss';
+
+  @theme {
+    --color-on-error: #690005;
+    --color-primary-fixed-dim: #acc7ff;
+    --color-border-subtle: #30363d;
+    --color-on-primary-fixed-variant: #004492;
+    --color-surface-dim: #10131a;
+    --color-on-background: #e0e2ec;
+    --color-background: #10131a;
+    --color-inverse-on-surface: #2d3038;
+    --color-on-tertiary-fixed: #321300;
+    --color-on-surface: #e0e2ec;
+    --color-inverse-surface: #e0e2ec;
+    --color-success: #3fb950;
+    --color-outline: #8b909f;
+    --color-surface-container-low: #181c23;
+    --color-secondary: #d5bbff;
+    --color-secondary-fixed-dim: #d5bbff;
+    --color-secondary-fixed: #ecdcff;
+    --color-outline-variant: #414754;
+    --color-on-tertiary-container: #481e00;
+    --color-on-secondary-fixed: #270058;
+    --color-on-surface-variant: #c1c6d6;
+    --color-on-primary: #002f68;
+    --color-surface-tint: #acc7ff;
+    --color-on-primary-fixed: #001a40;
+    --color-surface-container-high: #272a31;
+    --color-on-tertiary-fixed-variant: #753400;
+    --color-surface-variant: #32353c;
+    --color-tertiary-fixed-dim: #ffb68b;
+    --color-error: #f85149;
+    --color-on-error-container: #ffdad6;
+    --color-primary-fixed: #d7e2ff;
+    --color-tertiary: #ffb68b;
+    --color-primary: #acc7ff;
+    --color-on-tertiary: #522300;
+    --color-surface: #161b22;
+    --color-surface-container: #1d2027;
+    --color-on-secondary-fixed-variant: #5a21ab;
+    --color-inverse-primary: #005bbf;
+    --color-surface-container-lowest: #0b0e15;
+    --color-on-primary-container: #00285b;
+    --color-on-secondary: #41008b;
+    --color-tertiary-container: #e47014;
+    --color-text-secondary: #7d8590;
+    --color-text-primary: #e6edf3;
+    --color-on-secondary-container: #c6a5ff;
+    --color-tertiary-fixed: #ffdbc8;
+    --color-error-container: #93000a;
+    --color-secondary-container: #5a21ab;
+    --color-primary-container: #498fff;
+    --color-surface-bright: #363941;
+    --color-canvas-base: #0d1117;
+    --color-surface-container-highest: #32353c;
+
+    --font-body: Inter;
+    --font-code: 'JetBrains Mono';
+  }
+</style>

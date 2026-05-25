@@ -7,14 +7,17 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check"
+    "check": "astro check --tsconfig tsconfig.json",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "fmt": "prettier --cache --write \"./**/*.{js,mjs,ts,mts,css,astro,json,svg,yaml,yml,tsx,jsx}\"",
+    "fmt:check": "prettier --cache --write \"./**/*.{js,mjs,ts,mts,css,astro,json,svg,yaml,yml,tsx,jsx}\" --check"
   },
   "dependencies": {
     "@astrojs/react": "5.0.5",
     "@tailwindcss/vite": "4.3.0",
+    "@wterm/core": "^0.3.0",
+    "@wterm/react": "^0.3.0",
     "astro": "6.3.7",
     "react": "19.2.6",
     "react-dom": "19.2.6",

@@ -133,11 +133,11 @@ export type CommentAggregateArgs<
 }
 
 export type GetCommentAggregateType<T extends CommentAggregateArgs> = {
-  [P in keyof T & keyof AggregateComment]: P extends '_count' | 'count'
-    ? T[P] extends true
-      ? number
-      : Prisma.GetScalarType<T[P], AggregateComment[P]>
+  [P in keyof T & keyof AggregateComment]: P extends '_count' | 'count' ?
+    T[P] extends true ?
+      number
     : Prisma.GetScalarType<T[P], AggregateComment[P]>
+  : Prisma.GetScalarType<T[P], AggregateComment[P]>
 }
 
 export type CommentGroupByArgs<
@@ -170,11 +170,11 @@ export type CommentGroupByOutputType = {
 export type GetCommentGroupByPayload<T extends CommentGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CommentGroupByOutputType, T['by']> & {
-      [P in keyof T & keyof CommentGroupByOutputType]: P extends '_count'
-        ? T[P] extends boolean
-          ? number
-          : Prisma.GetScalarType<T[P], CommentGroupByOutputType[P]>
+      [P in keyof T & keyof CommentGroupByOutputType]: P extends '_count' ?
+        T[P] extends boolean ?
+          number
         : Prisma.GetScalarType<T[P], CommentGroupByOutputType[P]>
+      : Prisma.GetScalarType<T[P], CommentGroupByOutputType[P]>
     }
   >
 >
@@ -1067,7 +1067,7 @@ export interface CommentDelegate<
    * @param {CommentFindUniqueArgs} args - Arguments to find a Comment
    */
   findUnique<T extends CommentFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, CommentFindUniqueArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, CommentFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__CommentClient<
     runtime.Types.Result.GetResult<
       Prisma.$CommentPayload<ExtArgs>,
@@ -1095,7 +1095,7 @@ export interface CommentDelegate<
    * @param {CommentFindUniqueOrThrowArgs} args - Arguments to find a Comment
    */
   findUniqueOrThrow<T extends CommentFindUniqueOrThrowArgs>(
-    args: Prisma.SelectSubset<T, CommentFindUniqueOrThrowArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, CommentFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__CommentClient<
     runtime.Types.Result.GetResult<
       Prisma.$CommentPayload<ExtArgs>,
@@ -1123,7 +1123,7 @@ export interface CommentDelegate<
    * @param {CommentFindFirstArgs} args - Arguments to find a Comment
    */
   findFirst<T extends CommentFindFirstArgs>(
-    args?: Prisma.SelectSubset<T, CommentFindFirstArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, CommentFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__CommentClient<
     runtime.Types.Result.GetResult<
       Prisma.$CommentPayload<ExtArgs>,
@@ -1152,7 +1152,7 @@ export interface CommentDelegate<
    * @param {CommentFindFirstOrThrowArgs} args - Arguments to find a Comment
    */
   findFirstOrThrow<T extends CommentFindFirstOrThrowArgs>(
-    args?: Prisma.SelectSubset<T, CommentFindFirstOrThrowArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, CommentFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__CommentClient<
     runtime.Types.Result.GetResult<
       Prisma.$CommentPayload<ExtArgs>,
@@ -1182,7 +1182,7 @@ export interface CommentDelegate<
    * @param {CommentFindManyArgs} args - Arguments to filter and select certain fields only.
    */
   findMany<T extends CommentFindManyArgs>(
-    args?: Prisma.SelectSubset<T, CommentFindManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, CommentFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$CommentPayload<ExtArgs>,
@@ -1206,7 +1206,7 @@ export interface CommentDelegate<
    * @param {CommentCreateArgs} args - Arguments to create a Comment.
    */
   create<T extends CommentCreateArgs>(
-    args: Prisma.SelectSubset<T, CommentCreateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, CommentCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__CommentClient<
     runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
     never,
@@ -1228,7 +1228,7 @@ export interface CommentDelegate<
    * @param {CommentCreateManyArgs} args - Arguments to create many Comments.
    */
   createMany<T extends CommentCreateManyArgs>(
-    args?: Prisma.SelectSubset<T, CommentCreateManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, CommentCreateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1255,7 +1255,7 @@ export interface CommentDelegate<
    * @param {CommentCreateManyAndReturnArgs} args - Arguments to create many Comments.
    */
   createManyAndReturn<T extends CommentCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, CommentCreateManyAndReturnArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, CommentCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$CommentPayload<ExtArgs>,
@@ -1279,7 +1279,7 @@ export interface CommentDelegate<
    * @param {CommentDeleteArgs} args - Arguments to delete one Comment.
    */
   delete<T extends CommentDeleteArgs>(
-    args: Prisma.SelectSubset<T, CommentDeleteArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, CommentDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__CommentClient<
     runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
     never,
@@ -1304,7 +1304,7 @@ export interface CommentDelegate<
    * @param {CommentUpdateArgs} args - Arguments to update one Comment.
    */
   update<T extends CommentUpdateArgs>(
-    args: Prisma.SelectSubset<T, CommentUpdateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, CommentUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__CommentClient<
     runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
     never,
@@ -1326,7 +1326,7 @@ export interface CommentDelegate<
    * @param {CommentDeleteManyArgs} args - Arguments to filter Comments to delete.
    */
   deleteMany<T extends CommentDeleteManyArgs>(
-    args?: Prisma.SelectSubset<T, CommentDeleteManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, CommentDeleteManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1347,7 +1347,7 @@ export interface CommentDelegate<
    * @param {CommentUpdateManyArgs} args - Arguments to update one or more rows.
    */
   updateMany<T extends CommentUpdateManyArgs>(
-    args: Prisma.SelectSubset<T, CommentUpdateManyArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, CommentUpdateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1380,7 +1380,7 @@ export interface CommentDelegate<
    * @param {CommentUpdateManyAndReturnArgs} args - Arguments to update many Comments.
    */
   updateManyAndReturn<T extends CommentUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, CommentUpdateManyAndReturnArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, CommentUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$CommentPayload<ExtArgs>,
@@ -1410,7 +1410,7 @@ export interface CommentDelegate<
    * @param {CommentUpsertArgs} args - Arguments to update or create a Comment.
    */
   upsert<T extends CommentUpsertArgs>(
-    args: Prisma.SelectSubset<T, CommentUpsertArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, CommentUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__CommentClient<
     runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
     never,
@@ -1433,13 +1433,13 @@ export interface CommentDelegate<
    * @param {CommentCountArgs} args - Arguments to filter Comments to count.
    */
   count<T extends CommentCountArgs>(
-    args?: Prisma.Subset<T, CommentCountArgs>
+    args?: Prisma.Subset<T, CommentCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<'select', any>
-      ? T['select'] extends true
-        ? number
-        : Prisma.GetScalarType<T['select'], CommentCountAggregateOutputType>
-      : number
+    T extends runtime.Types.Utils.Record<'select', any> ?
+      T['select'] extends true ?
+        number
+      : Prisma.GetScalarType<T['select'], CommentCountAggregateOutputType>
+    : number
   >
 
   /**
@@ -1469,7 +1469,7 @@ export interface CommentDelegate<
    *   what fields.
    */
   aggregate<T extends CommentAggregateArgs>(
-    args: Prisma.Subset<T, CommentAggregateArgs>
+    args: Prisma.Subset<T, CommentAggregateArgs>,
   ): Prisma.PrismaPromise<GetCommentAggregateType<T>>
 
   /**
@@ -1496,9 +1496,9 @@ export interface CommentDelegate<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
-    OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: CommentGroupByArgs['orderBy'] }
-      : { orderBy?: CommentGroupByArgs['orderBy'] },
+    OrderByArg extends Prisma.True extends HasSelectOrTake ?
+      { orderBy: CommentGroupByArgs['orderBy'] }
+    : { orderBy?: CommentGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
       Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
@@ -1507,45 +1507,38 @@ export interface CommentDelegate<
     HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
     ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
-    InputErrors extends ByEmpty extends Prisma.True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends Prisma.False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-                ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
-          }[HavingFields]
-        : 'take' extends Prisma.Keys<T>
-          ? 'orderBy' extends Prisma.Keys<T>
-            ? ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields]
-            : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : 'skip' extends Prisma.Keys<T>
-            ? 'orderBy' extends Prisma.Keys<T>
-              ? ByValid extends Prisma.True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "skip", you also need to provide "orderBy"'
-            : ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields],
+    InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.`
+    : HavingValid extends Prisma.False ?
+      {
+        [P in HavingFields]: P extends ByFields ? never
+        : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+        : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+      }[HavingFields]
+    : 'take' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "take", you also need to provide "orderBy"'
+    : 'skip' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "skip", you also need to provide "orderBy"'
+    : ByValid extends Prisma.True ? {}
+    : {
+        [P in OrderFields]: P extends ByFields ? never
+        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+      }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, CommentGroupByArgs, OrderByArg> & InputErrors
+    args: Prisma.SubsetIntersection<T, CommentGroupByArgs, OrderByArg> & InputErrors,
   ): {} extends InputErrors ? GetCommentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /** Fields of the Comment model */
   readonly fields: CommentFieldRefs
@@ -1564,7 +1557,7 @@ export interface Prisma__CommentClient<
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
   author<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<
         Prisma.$UserPayload<ExtArgs>,
@@ -1578,7 +1571,7 @@ export interface Prisma__CommentClient<
     GlobalOmitOptions
   >
   issue<T extends Prisma.Comment$issueArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Comment$issueArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.Comment$issueArgs<ExtArgs>>,
   ): Prisma.Prisma__IssueClient<
     runtime.Types.Result.GetResult<
       Prisma.$IssuePayload<ExtArgs>,
@@ -1591,7 +1584,7 @@ export interface Prisma__CommentClient<
     GlobalOmitOptions
   >
   pullRequest<T extends Prisma.Comment$pullRequestArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Comment$pullRequestArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.Comment$pullRequestArgs<ExtArgs>>,
   ): Prisma.Prisma__PullRequestClient<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1612,7 +1605,7 @@ export interface Prisma__CommentClient<
    */
   then<TResult1 = T, TResult2 = never>(
     onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -1621,7 +1614,7 @@ export interface Prisma__CommentClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The

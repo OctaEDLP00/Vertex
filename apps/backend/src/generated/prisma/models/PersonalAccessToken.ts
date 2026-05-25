@@ -136,11 +136,11 @@ export type PersonalAccessTokenAggregateArgs<
 }
 
 export type GetPersonalAccessTokenAggregateType<T extends PersonalAccessTokenAggregateArgs> = {
-  [P in keyof T & keyof AggregatePersonalAccessToken]: P extends '_count' | 'count'
-    ? T[P] extends true
-      ? number
-      : Prisma.GetScalarType<T[P], AggregatePersonalAccessToken[P]>
+  [P in keyof T & keyof AggregatePersonalAccessToken]: P extends '_count' | 'count' ?
+    T[P] extends true ?
+      number
     : Prisma.GetScalarType<T[P], AggregatePersonalAccessToken[P]>
+  : Prisma.GetScalarType<T[P], AggregatePersonalAccessToken[P]>
 }
 
 export type PersonalAccessTokenGroupByArgs<
@@ -176,11 +176,11 @@ export type GetPersonalAccessTokenGroupByPayload<T extends PersonalAccessTokenGr
   Prisma.PrismaPromise<
     Array<
       Prisma.PickEnumerable<PersonalAccessTokenGroupByOutputType, T['by']> & {
-        [P in keyof T & keyof PersonalAccessTokenGroupByOutputType]: P extends '_count'
-          ? T[P] extends boolean
-            ? number
-            : Prisma.GetScalarType<T[P], PersonalAccessTokenGroupByOutputType[P]>
+        [P in keyof T & keyof PersonalAccessTokenGroupByOutputType]: P extends '_count' ?
+          T[P] extends boolean ?
+            number
           : Prisma.GetScalarType<T[P], PersonalAccessTokenGroupByOutputType[P]>
+        : Prisma.GetScalarType<T[P], PersonalAccessTokenGroupByOutputType[P]>
       }
     >
   >
@@ -719,7 +719,7 @@ export interface PersonalAccessTokenDelegate<
    * @param {PersonalAccessTokenFindUniqueArgs} args - Arguments to find a PersonalAccessToken
    */
   findUnique<T extends PersonalAccessTokenFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, PersonalAccessTokenFindUniqueArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PersonalAccessTokenFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__PersonalAccessTokenClient<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -748,7 +748,7 @@ export interface PersonalAccessTokenDelegate<
    *   PersonalAccessToken
    */
   findUniqueOrThrow<T extends PersonalAccessTokenFindUniqueOrThrowArgs>(
-    args: Prisma.SelectSubset<T, PersonalAccessTokenFindUniqueOrThrowArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PersonalAccessTokenFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__PersonalAccessTokenClient<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -776,7 +776,7 @@ export interface PersonalAccessTokenDelegate<
    * @param {PersonalAccessTokenFindFirstArgs} args - Arguments to find a PersonalAccessToken
    */
   findFirst<T extends PersonalAccessTokenFindFirstArgs>(
-    args?: Prisma.SelectSubset<T, PersonalAccessTokenFindFirstArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PersonalAccessTokenFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__PersonalAccessTokenClient<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -805,7 +805,7 @@ export interface PersonalAccessTokenDelegate<
    * @param {PersonalAccessTokenFindFirstOrThrowArgs} args - Arguments to find a PersonalAccessToken
    */
   findFirstOrThrow<T extends PersonalAccessTokenFindFirstOrThrowArgs>(
-    args?: Prisma.SelectSubset<T, PersonalAccessTokenFindFirstOrThrowArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PersonalAccessTokenFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__PersonalAccessTokenClient<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -839,7 +839,7 @@ export interface PersonalAccessTokenDelegate<
    *   only.
    */
   findMany<T extends PersonalAccessTokenFindManyArgs>(
-    args?: Prisma.SelectSubset<T, PersonalAccessTokenFindManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PersonalAccessTokenFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -863,7 +863,7 @@ export interface PersonalAccessTokenDelegate<
    * @param {PersonalAccessTokenCreateArgs} args - Arguments to create a PersonalAccessToken.
    */
   create<T extends PersonalAccessTokenCreateArgs>(
-    args: Prisma.SelectSubset<T, PersonalAccessTokenCreateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PersonalAccessTokenCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__PersonalAccessTokenClient<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -891,7 +891,7 @@ export interface PersonalAccessTokenDelegate<
    *   PersonalAccessTokens.
    */
   createMany<T extends PersonalAccessTokenCreateManyArgs>(
-    args?: Prisma.SelectSubset<T, PersonalAccessTokenCreateManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PersonalAccessTokenCreateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -919,7 +919,7 @@ export interface PersonalAccessTokenDelegate<
    *   PersonalAccessTokens.
    */
   createManyAndReturn<T extends PersonalAccessTokenCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, PersonalAccessTokenCreateManyAndReturnArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PersonalAccessTokenCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -943,7 +943,7 @@ export interface PersonalAccessTokenDelegate<
    * @param {PersonalAccessTokenDeleteArgs} args - Arguments to delete one PersonalAccessToken.
    */
   delete<T extends PersonalAccessTokenDeleteArgs>(
-    args: Prisma.SelectSubset<T, PersonalAccessTokenDeleteArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PersonalAccessTokenDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__PersonalAccessTokenClient<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -973,7 +973,7 @@ export interface PersonalAccessTokenDelegate<
    * @param {PersonalAccessTokenUpdateArgs} args - Arguments to update one PersonalAccessToken.
    */
   update<T extends PersonalAccessTokenUpdateArgs>(
-    args: Prisma.SelectSubset<T, PersonalAccessTokenUpdateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PersonalAccessTokenUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__PersonalAccessTokenClient<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -1001,7 +1001,7 @@ export interface PersonalAccessTokenDelegate<
    *   delete.
    */
   deleteMany<T extends PersonalAccessTokenDeleteManyArgs>(
-    args?: Prisma.SelectSubset<T, PersonalAccessTokenDeleteManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PersonalAccessTokenDeleteManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1022,7 +1022,7 @@ export interface PersonalAccessTokenDelegate<
    * @param {PersonalAccessTokenUpdateManyArgs} args - Arguments to update one or more rows.
    */
   updateMany<T extends PersonalAccessTokenUpdateManyArgs>(
-    args: Prisma.SelectSubset<T, PersonalAccessTokenUpdateManyArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PersonalAccessTokenUpdateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1056,7 +1056,7 @@ export interface PersonalAccessTokenDelegate<
    *   PersonalAccessTokens.
    */
   updateManyAndReturn<T extends PersonalAccessTokenUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, PersonalAccessTokenUpdateManyAndReturnArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PersonalAccessTokenUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -1087,7 +1087,7 @@ export interface PersonalAccessTokenDelegate<
    *   PersonalAccessToken.
    */
   upsert<T extends PersonalAccessTokenUpsertArgs>(
-    args: Prisma.SelectSubset<T, PersonalAccessTokenUpsertArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PersonalAccessTokenUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__PersonalAccessTokenClient<
     runtime.Types.Result.GetResult<
       Prisma.$PersonalAccessTokenPayload<ExtArgs>,
@@ -1115,13 +1115,13 @@ export interface PersonalAccessTokenDelegate<
    * @param {PersonalAccessTokenCountArgs} args - Arguments to filter PersonalAccessTokens to count.
    */
   count<T extends PersonalAccessTokenCountArgs>(
-    args?: Prisma.Subset<T, PersonalAccessTokenCountArgs>
+    args?: Prisma.Subset<T, PersonalAccessTokenCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<'select', any>
-      ? T['select'] extends true
-        ? number
-        : Prisma.GetScalarType<T['select'], PersonalAccessTokenCountAggregateOutputType>
-      : number
+    T extends runtime.Types.Utils.Record<'select', any> ?
+      T['select'] extends true ?
+        number
+      : Prisma.GetScalarType<T['select'], PersonalAccessTokenCountAggregateOutputType>
+    : number
   >
 
   /**
@@ -1152,7 +1152,7 @@ export interface PersonalAccessTokenDelegate<
    *   apply and on what fields.
    */
   aggregate<T extends PersonalAccessTokenAggregateArgs>(
-    args: Prisma.Subset<T, PersonalAccessTokenAggregateArgs>
+    args: Prisma.Subset<T, PersonalAccessTokenAggregateArgs>,
   ): Prisma.PrismaPromise<GetPersonalAccessTokenAggregateType<T>>
 
   /**
@@ -1179,9 +1179,9 @@ export interface PersonalAccessTokenDelegate<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
-    OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: PersonalAccessTokenGroupByArgs['orderBy'] }
-      : { orderBy?: PersonalAccessTokenGroupByArgs['orderBy'] },
+    OrderByArg extends Prisma.True extends HasSelectOrTake ?
+      { orderBy: PersonalAccessTokenGroupByArgs['orderBy'] }
+    : { orderBy?: PersonalAccessTokenGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
       Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
@@ -1190,48 +1190,40 @@ export interface PersonalAccessTokenDelegate<
     HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
     ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
-    InputErrors extends ByEmpty extends Prisma.True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends Prisma.False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-                ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
-          }[HavingFields]
-        : 'take' extends Prisma.Keys<T>
-          ? 'orderBy' extends Prisma.Keys<T>
-            ? ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields]
-            : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : 'skip' extends Prisma.Keys<T>
-            ? 'orderBy' extends Prisma.Keys<T>
-              ? ByValid extends Prisma.True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "skip", you also need to provide "orderBy"'
-            : ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields],
+    InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.`
+    : HavingValid extends Prisma.False ?
+      {
+        [P in HavingFields]: P extends ByFields ? never
+        : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+        : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+      }[HavingFields]
+    : 'take' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "take", you also need to provide "orderBy"'
+    : 'skip' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "skip", you also need to provide "orderBy"'
+    : ByValid extends Prisma.True ? {}
+    : {
+        [P in OrderFields]: P extends ByFields ? never
+        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+      }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, PersonalAccessTokenGroupByArgs, OrderByArg> & InputErrors
-  ): {} extends InputErrors
-    ? GetPersonalAccessTokenGroupByPayload<T>
-    : Prisma.PrismaPromise<InputErrors>
+    args: Prisma.SubsetIntersection<T, PersonalAccessTokenGroupByArgs, OrderByArg> & InputErrors,
+  ): {} extends InputErrors ? GetPersonalAccessTokenGroupByPayload<T>
+  : Prisma.PrismaPromise<InputErrors>
   /** Fields of the PersonalAccessToken model */
   readonly fields: PersonalAccessTokenFieldRefs
 }
@@ -1249,7 +1241,7 @@ export interface Prisma__PersonalAccessTokenClient<
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<
         Prisma.$UserPayload<ExtArgs>,
@@ -1271,7 +1263,7 @@ export interface Prisma__PersonalAccessTokenClient<
    */
   then<TResult1 = T, TResult2 = never>(
     onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -1280,7 +1272,7 @@ export interface Prisma__PersonalAccessTokenClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The

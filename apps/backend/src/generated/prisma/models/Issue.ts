@@ -175,11 +175,11 @@ export type IssueAggregateArgs<
 }
 
 export type GetIssueAggregateType<T extends IssueAggregateArgs> = {
-  [P in keyof T & keyof AggregateIssue]: P extends '_count' | 'count'
-    ? T[P] extends true
-      ? number
-      : Prisma.GetScalarType<T[P], AggregateIssue[P]>
+  [P in keyof T & keyof AggregateIssue]: P extends '_count' | 'count' ?
+    T[P] extends true ?
+      number
     : Prisma.GetScalarType<T[P], AggregateIssue[P]>
+  : Prisma.GetScalarType<T[P], AggregateIssue[P]>
 }
 
 export type IssueGroupByArgs<
@@ -218,11 +218,11 @@ export type IssueGroupByOutputType = {
 export type GetIssueGroupByPayload<T extends IssueGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<IssueGroupByOutputType, T['by']> & {
-      [P in keyof T & keyof IssueGroupByOutputType]: P extends '_count'
-        ? T[P] extends boolean
-          ? number
-          : Prisma.GetScalarType<T[P], IssueGroupByOutputType[P]>
+      [P in keyof T & keyof IssueGroupByOutputType]: P extends '_count' ?
+        T[P] extends boolean ?
+          number
         : Prisma.GetScalarType<T[P], IssueGroupByOutputType[P]>
+      : Prisma.GetScalarType<T[P], IssueGroupByOutputType[P]>
     }
   >
 >
@@ -1170,7 +1170,7 @@ export interface IssueDelegate<
    * @param {IssueFindUniqueArgs} args - Arguments to find a Issue
    */
   findUnique<T extends IssueFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, IssueFindUniqueArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, IssueFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__IssueClient<
     runtime.Types.Result.GetResult<
       Prisma.$IssuePayload<ExtArgs>,
@@ -1198,7 +1198,7 @@ export interface IssueDelegate<
    * @param {IssueFindUniqueOrThrowArgs} args - Arguments to find a Issue
    */
   findUniqueOrThrow<T extends IssueFindUniqueOrThrowArgs>(
-    args: Prisma.SelectSubset<T, IssueFindUniqueOrThrowArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, IssueFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__IssueClient<
     runtime.Types.Result.GetResult<
       Prisma.$IssuePayload<ExtArgs>,
@@ -1226,7 +1226,7 @@ export interface IssueDelegate<
    * @param {IssueFindFirstArgs} args - Arguments to find a Issue
    */
   findFirst<T extends IssueFindFirstArgs>(
-    args?: Prisma.SelectSubset<T, IssueFindFirstArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, IssueFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__IssueClient<
     runtime.Types.Result.GetResult<
       Prisma.$IssuePayload<ExtArgs>,
@@ -1255,7 +1255,7 @@ export interface IssueDelegate<
    * @param {IssueFindFirstOrThrowArgs} args - Arguments to find a Issue
    */
   findFirstOrThrow<T extends IssueFindFirstOrThrowArgs>(
-    args?: Prisma.SelectSubset<T, IssueFindFirstOrThrowArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, IssueFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__IssueClient<
     runtime.Types.Result.GetResult<
       Prisma.$IssuePayload<ExtArgs>,
@@ -1285,7 +1285,7 @@ export interface IssueDelegate<
    * @param {IssueFindManyArgs} args - Arguments to filter and select certain fields only.
    */
   findMany<T extends IssueFindManyArgs>(
-    args?: Prisma.SelectSubset<T, IssueFindManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, IssueFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<Prisma.$IssuePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
   >
@@ -1304,7 +1304,7 @@ export interface IssueDelegate<
    * @param {IssueCreateArgs} args - Arguments to create a Issue.
    */
   create<T extends IssueCreateArgs>(
-    args: Prisma.SelectSubset<T, IssueCreateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, IssueCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__IssueClient<
     runtime.Types.Result.GetResult<Prisma.$IssuePayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
     never,
@@ -1326,7 +1326,7 @@ export interface IssueDelegate<
    * @param {IssueCreateManyArgs} args - Arguments to create many Issues.
    */
   createMany<T extends IssueCreateManyArgs>(
-    args?: Prisma.SelectSubset<T, IssueCreateManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, IssueCreateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1353,7 +1353,7 @@ export interface IssueDelegate<
    * @param {IssueCreateManyAndReturnArgs} args - Arguments to create many Issues.
    */
   createManyAndReturn<T extends IssueCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, IssueCreateManyAndReturnArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, IssueCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$IssuePayload<ExtArgs>,
@@ -1377,7 +1377,7 @@ export interface IssueDelegate<
    * @param {IssueDeleteArgs} args - Arguments to delete one Issue.
    */
   delete<T extends IssueDeleteArgs>(
-    args: Prisma.SelectSubset<T, IssueDeleteArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, IssueDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__IssueClient<
     runtime.Types.Result.GetResult<Prisma.$IssuePayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
     never,
@@ -1402,7 +1402,7 @@ export interface IssueDelegate<
    * @param {IssueUpdateArgs} args - Arguments to update one Issue.
    */
   update<T extends IssueUpdateArgs>(
-    args: Prisma.SelectSubset<T, IssueUpdateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, IssueUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__IssueClient<
     runtime.Types.Result.GetResult<Prisma.$IssuePayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
     never,
@@ -1424,7 +1424,7 @@ export interface IssueDelegate<
    * @param {IssueDeleteManyArgs} args - Arguments to filter Issues to delete.
    */
   deleteMany<T extends IssueDeleteManyArgs>(
-    args?: Prisma.SelectSubset<T, IssueDeleteManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, IssueDeleteManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1445,7 +1445,7 @@ export interface IssueDelegate<
    * @param {IssueUpdateManyArgs} args - Arguments to update one or more rows.
    */
   updateMany<T extends IssueUpdateManyArgs>(
-    args: Prisma.SelectSubset<T, IssueUpdateManyArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, IssueUpdateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1478,7 +1478,7 @@ export interface IssueDelegate<
    * @param {IssueUpdateManyAndReturnArgs} args - Arguments to update many Issues.
    */
   updateManyAndReturn<T extends IssueUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, IssueUpdateManyAndReturnArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, IssueUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$IssuePayload<ExtArgs>,
@@ -1508,7 +1508,7 @@ export interface IssueDelegate<
    * @param {IssueUpsertArgs} args - Arguments to update or create a Issue.
    */
   upsert<T extends IssueUpsertArgs>(
-    args: Prisma.SelectSubset<T, IssueUpsertArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, IssueUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__IssueClient<
     runtime.Types.Result.GetResult<Prisma.$IssuePayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
     never,
@@ -1531,13 +1531,13 @@ export interface IssueDelegate<
    * @param {IssueCountArgs} args - Arguments to filter Issues to count.
    */
   count<T extends IssueCountArgs>(
-    args?: Prisma.Subset<T, IssueCountArgs>
+    args?: Prisma.Subset<T, IssueCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<'select', any>
-      ? T['select'] extends true
-        ? number
-        : Prisma.GetScalarType<T['select'], IssueCountAggregateOutputType>
-      : number
+    T extends runtime.Types.Utils.Record<'select', any> ?
+      T['select'] extends true ?
+        number
+      : Prisma.GetScalarType<T['select'], IssueCountAggregateOutputType>
+    : number
   >
 
   /**
@@ -1567,7 +1567,7 @@ export interface IssueDelegate<
    *   what fields.
    */
   aggregate<T extends IssueAggregateArgs>(
-    args: Prisma.Subset<T, IssueAggregateArgs>
+    args: Prisma.Subset<T, IssueAggregateArgs>,
   ): Prisma.PrismaPromise<GetIssueAggregateType<T>>
 
   /**
@@ -1594,9 +1594,9 @@ export interface IssueDelegate<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
-    OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: IssueGroupByArgs['orderBy'] }
-      : { orderBy?: IssueGroupByArgs['orderBy'] },
+    OrderByArg extends Prisma.True extends HasSelectOrTake ?
+      { orderBy: IssueGroupByArgs['orderBy'] }
+    : { orderBy?: IssueGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
       Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
@@ -1605,45 +1605,38 @@ export interface IssueDelegate<
     HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
     ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
-    InputErrors extends ByEmpty extends Prisma.True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends Prisma.False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-                ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
-          }[HavingFields]
-        : 'take' extends Prisma.Keys<T>
-          ? 'orderBy' extends Prisma.Keys<T>
-            ? ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields]
-            : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : 'skip' extends Prisma.Keys<T>
-            ? 'orderBy' extends Prisma.Keys<T>
-              ? ByValid extends Prisma.True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "skip", you also need to provide "orderBy"'
-            : ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields],
+    InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.`
+    : HavingValid extends Prisma.False ?
+      {
+        [P in HavingFields]: P extends ByFields ? never
+        : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+        : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+      }[HavingFields]
+    : 'take' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "take", you also need to provide "orderBy"'
+    : 'skip' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "skip", you also need to provide "orderBy"'
+    : ByValid extends Prisma.True ? {}
+    : {
+        [P in OrderFields]: P extends ByFields ? never
+        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+      }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, IssueGroupByArgs, OrderByArg> & InputErrors
+    args: Prisma.SubsetIntersection<T, IssueGroupByArgs, OrderByArg> & InputErrors,
   ): {} extends InputErrors ? GetIssueGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /** Fields of the Issue model */
   readonly fields: IssueFieldRefs
@@ -1662,7 +1655,7 @@ export interface Prisma__IssueClient<
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
   repository<T extends Prisma.RepositoryDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.RepositoryDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.RepositoryDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     | runtime.Types.Result.GetResult<
         Prisma.$RepositoryPayload<ExtArgs>,
@@ -1676,7 +1669,7 @@ export interface Prisma__IssueClient<
     GlobalOmitOptions
   >
   author<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<
         Prisma.$UserPayload<ExtArgs>,
@@ -1690,7 +1683,7 @@ export interface Prisma__IssueClient<
     GlobalOmitOptions
   >
   comments<T extends Prisma.Issue$commentsArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Issue$commentsArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.Issue$commentsArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$CommentPayload<ExtArgs>,
@@ -1709,7 +1702,7 @@ export interface Prisma__IssueClient<
    */
   then<TResult1 = T, TResult2 = never>(
     onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -1718,7 +1711,7 @@ export interface Prisma__IssueClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The

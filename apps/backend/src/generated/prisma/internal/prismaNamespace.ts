@@ -145,11 +145,9 @@ export type Subset<T, U> = {
  */
 export type SelectSubset<T, U> = {
   [key in keyof T]: key extends keyof U ? T[key] : never
-} & (T extends SelectAndInclude
-  ? 'Please either choose `select` or `include`.'
-  : T extends SelectAndOmit
-    ? 'Please either choose `select` or `omit`.'
-    : {})
+} & (T extends SelectAndInclude ? 'Please either choose `select` or `include`.'
+: T extends SelectAndOmit ? 'Please either choose `select` or `omit`.'
+: {})
 
 /**
  * Subset + Intersection
@@ -166,25 +164,21 @@ type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
  * XOR is needed to have a real mutually exclusive union type
  * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
  */
-export type XOR<T, U> = T extends object
-  ? U extends object
-    ? (Without<T, U> & U) | (Without<U, T> & T)
+export type XOR<T, U> =
+  T extends object ?
+    U extends object ?
+      (Without<T, U> & U) | (Without<U, T> & T)
     : U
   : T
 
 /** Is T a Record? */
 type IsObject<T extends any> =
-  T extends Array<any>
-    ? False
-    : T extends Date
-      ? False
-      : T extends Uint8Array
-        ? False
-        : T extends BigInt
-          ? False
-          : T extends object
-            ? True
-            : False
+  T extends Array<any> ? False
+  : T extends Date ? False
+  : T extends Uint8Array ? False
+  : T extends BigInt ? False
+  : T extends object ? True
+  : False
 
 /** If it's T[], return T */
 export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T
@@ -206,9 +200,8 @@ type _Either<O extends object, K extends Key, strict extends Boolean> = {
   0: EitherLoose<O, K>
 }[strict]
 
-export type Either<O extends object, K extends Key, strict extends Boolean = 1> = O extends unknown
-  ? _Either<O, K, strict>
-  : never
+export type Either<O extends object, K extends Key, strict extends Boolean = 1> =
+  O extends unknown ? _Either<O, K, strict> : never
 
 export type Union = any
 
@@ -217,11 +210,8 @@ export type PatchUndefined<O extends object, O1 extends object> = {
 } & {}
 
 /** Helper Types for "Merge" * */
-export type IntersectOf<U extends Union> = (U extends unknown ? (k: U) => void : never) extends (
-  k: infer I
-) => void
-  ? I
-  : never
+export type IntersectOf<U extends Union> =
+  (U extends unknown ? (k: U) => void : never) extends (k: infer I) => void ? I : never
 
 export type Overwrite<O extends object, O1 extends object> = {
   [K in keyof O]: K extends keyof O1 ? O1[K] : O[K]
@@ -244,8 +234,8 @@ export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
   0: AtLoose<O, K>
 }[strict]
 
-export type ComputeRaw<A extends any> = A extends Function
-  ? A
+export type ComputeRaw<A extends any> =
+  A extends Function ? A
   : {
       [K in keyof A]: A[K]
     } & {}
@@ -263,16 +253,14 @@ type NoExpand<T> = T extends unknown ? T : never
 
 // this type assumes the passed object is entirely optional
 export type AtLeast<O extends object, K extends string> = NoExpand<
-  O extends unknown
-    ?
-        | (K extends keyof O ? { [P in K]: O[P] } & O : O)
-        | ({ [P in keyof O as P extends K ? P : never]-?: O[P] } & O)
-    : never
+  O extends unknown ?
+    | (K extends keyof O ? { [P in K]: O[P] } & O : O)
+    | ({ [P in keyof O as P extends K ? P : never]-?: O[P] } & O)
+  : never
 >
 
-type _Strict<U, _U = U> = U extends unknown
-  ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>>
-  : never
+type _Strict<U, _U = U> =
+  U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never
 
 export type Strict<U extends object> = ComputeRaw<_Strict<U>>
 /** End Helper Types for "Merge" * */
@@ -290,11 +278,11 @@ export type Not<B extends Boolean> = {
   1: 0
 }[B]
 
-export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
-  ? 0 // anything `never` is false
-  : A1 extends A2
-    ? 1
-    : 0
+export type Extends<A1 extends any, A2 extends any> =
+  [A1] extends [never] ?
+    0 // anything `never` is false
+  : A1 extends A2 ? 1
+  : 0
 
 export type Has<U extends Union, U1 extends Union> = Not<Extends<Exclude<U1, U>, U1>>
 
@@ -311,8 +299,9 @@ export type Or<B1 extends Boolean, B2 extends Boolean> = {
 
 export type Keys<U extends Union> = U extends unknown ? keyof U : never
 
-export type GetScalarType<T, O> = O extends object
-  ? {
+export type GetScalarType<T, O> =
+  O extends object ?
+    {
       [P in keyof T]: P extends keyof O ? O[P] : never
     }
   : never
@@ -321,16 +310,15 @@ type FieldPaths<T, U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>> =
   IsObject<T> extends True ? U : T
 
 export type GetHavingFields<T> = {
-  [K in keyof T]: Or<Or<Extends<'OR', K>, Extends<'AND', K>>, Extends<'NOT', K>> extends True
-    ? // infer is only needed to not hit TS limit
-      // based on the brilliant idea of Pierre-Antoine Mills
-      // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
-      T[K] extends infer TK
-      ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
-      : never
-    : {} extends FieldPaths<T[K]>
-      ? never
-      : K
+  [K in keyof T]: Or<Or<Extends<'OR', K>, Extends<'AND', K>>, Extends<'NOT', K>> extends True ?
+    // infer is only needed to not hit TS limit
+    // based on the brilliant idea of Pierre-Antoine Mills
+    // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
+    T[K] extends infer TK ?
+      GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
+    : never
+  : {} extends FieldPaths<T[K]> ? never
+  : K
 }[keyof T]
 
 /** Convert tuple to union */
@@ -1123,7 +1111,7 @@ export type PrismaClientOptions = (
    *   { emit: 'stdout', level: 'warn' }
    *   { emit: 'stdout', level: 'error' }
    *   ```
-   * Read more in our [docs](https://pris.ly/d/logging).
+   *   Read more in our [docs](https://pris.ly/d/logging).
    */
   log?: (LogLevel | LogDefinition)[]
   /** The default values for transactionOptions maxWait ?= 2000 timeout ?= 5000 */
@@ -1136,7 +1124,7 @@ export type PrismaClientOptions = (
    * Global configuration for omitting model fields by default.
    *
    * @example
-   *   ```
+   *   ;```
    *   const prisma = new PrismaClient({
    *   omit: {
    *   user: {
@@ -1152,7 +1140,7 @@ export type PrismaClientOptions = (
    * sqlcommenter format: https://google.github.io/sqlcommenter/
    *
    * @example
-   *   ```
+   *   ;```
    *   const prisma = new PrismaClient({
    *   adapter,
    *   comments: [
@@ -1170,7 +1158,7 @@ export type PrismaClientOptions = (
    * cache size can reduce memory usage.
    *
    * @example
-   *   ```
+   *   ;```
    *   const prisma = new PrismaClient({
    *   adapter,
    *   queryPlanCacheMaxSize: 100,

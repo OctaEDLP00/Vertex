@@ -133,11 +133,11 @@ export type WebhookAggregateArgs<
 }
 
 export type GetWebhookAggregateType<T extends WebhookAggregateArgs> = {
-  [P in keyof T & keyof AggregateWebhook]: P extends '_count' | 'count'
-    ? T[P] extends true
-      ? number
-      : Prisma.GetScalarType<T[P], AggregateWebhook[P]>
+  [P in keyof T & keyof AggregateWebhook]: P extends '_count' | 'count' ?
+    T[P] extends true ?
+      number
     : Prisma.GetScalarType<T[P], AggregateWebhook[P]>
+  : Prisma.GetScalarType<T[P], AggregateWebhook[P]>
 }
 
 export type WebhookGroupByArgs<
@@ -170,11 +170,11 @@ export type WebhookGroupByOutputType = {
 export type GetWebhookGroupByPayload<T extends WebhookGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<WebhookGroupByOutputType, T['by']> & {
-      [P in keyof T & keyof WebhookGroupByOutputType]: P extends '_count'
-        ? T[P] extends boolean
-          ? number
-          : Prisma.GetScalarType<T[P], WebhookGroupByOutputType[P]>
+      [P in keyof T & keyof WebhookGroupByOutputType]: P extends '_count' ?
+        T[P] extends boolean ?
+          number
         : Prisma.GetScalarType<T[P], WebhookGroupByOutputType[P]>
+      : Prisma.GetScalarType<T[P], WebhookGroupByOutputType[P]>
     }
   >
 >
@@ -683,7 +683,7 @@ export interface WebhookDelegate<
    * @param {WebhookFindUniqueArgs} args - Arguments to find a Webhook
    */
   findUnique<T extends WebhookFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, WebhookFindUniqueArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, WebhookFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__WebhookClient<
     runtime.Types.Result.GetResult<
       Prisma.$WebhookPayload<ExtArgs>,
@@ -711,7 +711,7 @@ export interface WebhookDelegate<
    * @param {WebhookFindUniqueOrThrowArgs} args - Arguments to find a Webhook
    */
   findUniqueOrThrow<T extends WebhookFindUniqueOrThrowArgs>(
-    args: Prisma.SelectSubset<T, WebhookFindUniqueOrThrowArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, WebhookFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__WebhookClient<
     runtime.Types.Result.GetResult<
       Prisma.$WebhookPayload<ExtArgs>,
@@ -739,7 +739,7 @@ export interface WebhookDelegate<
    * @param {WebhookFindFirstArgs} args - Arguments to find a Webhook
    */
   findFirst<T extends WebhookFindFirstArgs>(
-    args?: Prisma.SelectSubset<T, WebhookFindFirstArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, WebhookFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__WebhookClient<
     runtime.Types.Result.GetResult<
       Prisma.$WebhookPayload<ExtArgs>,
@@ -768,7 +768,7 @@ export interface WebhookDelegate<
    * @param {WebhookFindFirstOrThrowArgs} args - Arguments to find a Webhook
    */
   findFirstOrThrow<T extends WebhookFindFirstOrThrowArgs>(
-    args?: Prisma.SelectSubset<T, WebhookFindFirstOrThrowArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, WebhookFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__WebhookClient<
     runtime.Types.Result.GetResult<
       Prisma.$WebhookPayload<ExtArgs>,
@@ -798,7 +798,7 @@ export interface WebhookDelegate<
    * @param {WebhookFindManyArgs} args - Arguments to filter and select certain fields only.
    */
   findMany<T extends WebhookFindManyArgs>(
-    args?: Prisma.SelectSubset<T, WebhookFindManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, WebhookFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$WebhookPayload<ExtArgs>,
@@ -822,7 +822,7 @@ export interface WebhookDelegate<
    * @param {WebhookCreateArgs} args - Arguments to create a Webhook.
    */
   create<T extends WebhookCreateArgs>(
-    args: Prisma.SelectSubset<T, WebhookCreateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, WebhookCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__WebhookClient<
     runtime.Types.Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
     never,
@@ -844,7 +844,7 @@ export interface WebhookDelegate<
    * @param {WebhookCreateManyArgs} args - Arguments to create many Webhooks.
    */
   createMany<T extends WebhookCreateManyArgs>(
-    args?: Prisma.SelectSubset<T, WebhookCreateManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, WebhookCreateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -871,7 +871,7 @@ export interface WebhookDelegate<
    * @param {WebhookCreateManyAndReturnArgs} args - Arguments to create many Webhooks.
    */
   createManyAndReturn<T extends WebhookCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, WebhookCreateManyAndReturnArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, WebhookCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$WebhookPayload<ExtArgs>,
@@ -895,7 +895,7 @@ export interface WebhookDelegate<
    * @param {WebhookDeleteArgs} args - Arguments to delete one Webhook.
    */
   delete<T extends WebhookDeleteArgs>(
-    args: Prisma.SelectSubset<T, WebhookDeleteArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, WebhookDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__WebhookClient<
     runtime.Types.Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
     never,
@@ -920,7 +920,7 @@ export interface WebhookDelegate<
    * @param {WebhookUpdateArgs} args - Arguments to update one Webhook.
    */
   update<T extends WebhookUpdateArgs>(
-    args: Prisma.SelectSubset<T, WebhookUpdateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, WebhookUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__WebhookClient<
     runtime.Types.Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
     never,
@@ -942,7 +942,7 @@ export interface WebhookDelegate<
    * @param {WebhookDeleteManyArgs} args - Arguments to filter Webhooks to delete.
    */
   deleteMany<T extends WebhookDeleteManyArgs>(
-    args?: Prisma.SelectSubset<T, WebhookDeleteManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, WebhookDeleteManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -963,7 +963,7 @@ export interface WebhookDelegate<
    * @param {WebhookUpdateManyArgs} args - Arguments to update one or more rows.
    */
   updateMany<T extends WebhookUpdateManyArgs>(
-    args: Prisma.SelectSubset<T, WebhookUpdateManyArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, WebhookUpdateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -996,7 +996,7 @@ export interface WebhookDelegate<
    * @param {WebhookUpdateManyAndReturnArgs} args - Arguments to update many Webhooks.
    */
   updateManyAndReturn<T extends WebhookUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, WebhookUpdateManyAndReturnArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, WebhookUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$WebhookPayload<ExtArgs>,
@@ -1026,7 +1026,7 @@ export interface WebhookDelegate<
    * @param {WebhookUpsertArgs} args - Arguments to update or create a Webhook.
    */
   upsert<T extends WebhookUpsertArgs>(
-    args: Prisma.SelectSubset<T, WebhookUpsertArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, WebhookUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__WebhookClient<
     runtime.Types.Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
     never,
@@ -1049,13 +1049,13 @@ export interface WebhookDelegate<
    * @param {WebhookCountArgs} args - Arguments to filter Webhooks to count.
    */
   count<T extends WebhookCountArgs>(
-    args?: Prisma.Subset<T, WebhookCountArgs>
+    args?: Prisma.Subset<T, WebhookCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<'select', any>
-      ? T['select'] extends true
-        ? number
-        : Prisma.GetScalarType<T['select'], WebhookCountAggregateOutputType>
-      : number
+    T extends runtime.Types.Utils.Record<'select', any> ?
+      T['select'] extends true ?
+        number
+      : Prisma.GetScalarType<T['select'], WebhookCountAggregateOutputType>
+    : number
   >
 
   /**
@@ -1085,7 +1085,7 @@ export interface WebhookDelegate<
    *   what fields.
    */
   aggregate<T extends WebhookAggregateArgs>(
-    args: Prisma.Subset<T, WebhookAggregateArgs>
+    args: Prisma.Subset<T, WebhookAggregateArgs>,
   ): Prisma.PrismaPromise<GetWebhookAggregateType<T>>
 
   /**
@@ -1112,9 +1112,9 @@ export interface WebhookDelegate<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
-    OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: WebhookGroupByArgs['orderBy'] }
-      : { orderBy?: WebhookGroupByArgs['orderBy'] },
+    OrderByArg extends Prisma.True extends HasSelectOrTake ?
+      { orderBy: WebhookGroupByArgs['orderBy'] }
+    : { orderBy?: WebhookGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
       Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
@@ -1123,45 +1123,38 @@ export interface WebhookDelegate<
     HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
     ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
-    InputErrors extends ByEmpty extends Prisma.True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends Prisma.False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-                ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
-          }[HavingFields]
-        : 'take' extends Prisma.Keys<T>
-          ? 'orderBy' extends Prisma.Keys<T>
-            ? ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields]
-            : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : 'skip' extends Prisma.Keys<T>
-            ? 'orderBy' extends Prisma.Keys<T>
-              ? ByValid extends Prisma.True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "skip", you also need to provide "orderBy"'
-            : ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields],
+    InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.`
+    : HavingValid extends Prisma.False ?
+      {
+        [P in HavingFields]: P extends ByFields ? never
+        : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+        : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+      }[HavingFields]
+    : 'take' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "take", you also need to provide "orderBy"'
+    : 'skip' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "skip", you also need to provide "orderBy"'
+    : ByValid extends Prisma.True ? {}
+    : {
+        [P in OrderFields]: P extends ByFields ? never
+        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+      }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, WebhookGroupByArgs, OrderByArg> & InputErrors
+    args: Prisma.SubsetIntersection<T, WebhookGroupByArgs, OrderByArg> & InputErrors,
   ): {} extends InputErrors ? GetWebhookGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /** Fields of the Webhook model */
   readonly fields: WebhookFieldRefs
@@ -1180,7 +1173,7 @@ export interface Prisma__WebhookClient<
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
   repository<T extends Prisma.RepositoryDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.RepositoryDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.RepositoryDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     | runtime.Types.Result.GetResult<
         Prisma.$RepositoryPayload<ExtArgs>,
@@ -1202,7 +1195,7 @@ export interface Prisma__WebhookClient<
    */
   then<TResult1 = T, TResult2 = never>(
     onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -1211,7 +1204,7 @@ export interface Prisma__WebhookClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The

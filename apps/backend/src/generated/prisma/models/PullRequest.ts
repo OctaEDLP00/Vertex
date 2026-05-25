@@ -189,11 +189,11 @@ export type PullRequestAggregateArgs<
 }
 
 export type GetPullRequestAggregateType<T extends PullRequestAggregateArgs> = {
-  [P in keyof T & keyof AggregatePullRequest]: P extends '_count' | 'count'
-    ? T[P] extends true
-      ? number
-      : Prisma.GetScalarType<T[P], AggregatePullRequest[P]>
+  [P in keyof T & keyof AggregatePullRequest]: P extends '_count' | 'count' ?
+    T[P] extends true ?
+      number
     : Prisma.GetScalarType<T[P], AggregatePullRequest[P]>
+  : Prisma.GetScalarType<T[P], AggregatePullRequest[P]>
 }
 
 export type PullRequestGroupByArgs<
@@ -236,11 +236,11 @@ export type PullRequestGroupByOutputType = {
 export type GetPullRequestGroupByPayload<T extends PullRequestGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PullRequestGroupByOutputType, T['by']> & {
-      [P in keyof T & keyof PullRequestGroupByOutputType]: P extends '_count'
-        ? T[P] extends boolean
-          ? number
-          : Prisma.GetScalarType<T[P], PullRequestGroupByOutputType[P]>
+      [P in keyof T & keyof PullRequestGroupByOutputType]: P extends '_count' ?
+        T[P] extends boolean ?
+          number
         : Prisma.GetScalarType<T[P], PullRequestGroupByOutputType[P]>
+      : Prisma.GetScalarType<T[P], PullRequestGroupByOutputType[P]>
     }
   >
 >
@@ -1263,7 +1263,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestFindUniqueArgs} args - Arguments to find a PullRequest
    */
   findUnique<T extends PullRequestFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, PullRequestFindUniqueArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PullRequestFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__PullRequestClient<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1291,7 +1291,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestFindUniqueOrThrowArgs} args - Arguments to find a PullRequest
    */
   findUniqueOrThrow<T extends PullRequestFindUniqueOrThrowArgs>(
-    args: Prisma.SelectSubset<T, PullRequestFindUniqueOrThrowArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PullRequestFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__PullRequestClient<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1319,7 +1319,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestFindFirstArgs} args - Arguments to find a PullRequest
    */
   findFirst<T extends PullRequestFindFirstArgs>(
-    args?: Prisma.SelectSubset<T, PullRequestFindFirstArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PullRequestFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__PullRequestClient<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1348,7 +1348,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestFindFirstOrThrowArgs} args - Arguments to find a PullRequest
    */
   findFirstOrThrow<T extends PullRequestFindFirstOrThrowArgs>(
-    args?: Prisma.SelectSubset<T, PullRequestFindFirstOrThrowArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PullRequestFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__PullRequestClient<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1378,7 +1378,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestFindManyArgs} args - Arguments to filter and select certain fields only.
    */
   findMany<T extends PullRequestFindManyArgs>(
-    args?: Prisma.SelectSubset<T, PullRequestFindManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PullRequestFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1402,7 +1402,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestCreateArgs} args - Arguments to create a PullRequest.
    */
   create<T extends PullRequestCreateArgs>(
-    args: Prisma.SelectSubset<T, PullRequestCreateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PullRequestCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__PullRequestClient<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1429,7 +1429,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestCreateManyArgs} args - Arguments to create many PullRequests.
    */
   createMany<T extends PullRequestCreateManyArgs>(
-    args?: Prisma.SelectSubset<T, PullRequestCreateManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PullRequestCreateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1456,7 +1456,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestCreateManyAndReturnArgs} args - Arguments to create many PullRequests.
    */
   createManyAndReturn<T extends PullRequestCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, PullRequestCreateManyAndReturnArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PullRequestCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1480,7 +1480,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestDeleteArgs} args - Arguments to delete one PullRequest.
    */
   delete<T extends PullRequestDeleteArgs>(
-    args: Prisma.SelectSubset<T, PullRequestDeleteArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PullRequestDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__PullRequestClient<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1510,7 +1510,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestUpdateArgs} args - Arguments to update one PullRequest.
    */
   update<T extends PullRequestUpdateArgs>(
-    args: Prisma.SelectSubset<T, PullRequestUpdateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PullRequestUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__PullRequestClient<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1537,7 +1537,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestDeleteManyArgs} args - Arguments to filter PullRequests to delete.
    */
   deleteMany<T extends PullRequestDeleteManyArgs>(
-    args?: Prisma.SelectSubset<T, PullRequestDeleteManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, PullRequestDeleteManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1558,7 +1558,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestUpdateManyArgs} args - Arguments to update one or more rows.
    */
   updateMany<T extends PullRequestUpdateManyArgs>(
-    args: Prisma.SelectSubset<T, PullRequestUpdateManyArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PullRequestUpdateManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
@@ -1591,7 +1591,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestUpdateManyAndReturnArgs} args - Arguments to update many PullRequests.
    */
   updateManyAndReturn<T extends PullRequestUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, PullRequestUpdateManyAndReturnArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PullRequestUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1621,7 +1621,7 @@ export interface PullRequestDelegate<
    * @param {PullRequestUpsertArgs} args - Arguments to update or create a PullRequest.
    */
   upsert<T extends PullRequestUpsertArgs>(
-    args: Prisma.SelectSubset<T, PullRequestUpsertArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, PullRequestUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__PullRequestClient<
     runtime.Types.Result.GetResult<
       Prisma.$PullRequestPayload<ExtArgs>,
@@ -1649,13 +1649,13 @@ export interface PullRequestDelegate<
    * @param {PullRequestCountArgs} args - Arguments to filter PullRequests to count.
    */
   count<T extends PullRequestCountArgs>(
-    args?: Prisma.Subset<T, PullRequestCountArgs>
+    args?: Prisma.Subset<T, PullRequestCountArgs>,
   ): Prisma.PrismaPromise<
-    T extends runtime.Types.Utils.Record<'select', any>
-      ? T['select'] extends true
-        ? number
-        : Prisma.GetScalarType<T['select'], PullRequestCountAggregateOutputType>
-      : number
+    T extends runtime.Types.Utils.Record<'select', any> ?
+      T['select'] extends true ?
+        number
+      : Prisma.GetScalarType<T['select'], PullRequestCountAggregateOutputType>
+    : number
   >
 
   /**
@@ -1686,7 +1686,7 @@ export interface PullRequestDelegate<
    *   on what fields.
    */
   aggregate<T extends PullRequestAggregateArgs>(
-    args: Prisma.Subset<T, PullRequestAggregateArgs>
+    args: Prisma.Subset<T, PullRequestAggregateArgs>,
   ): Prisma.PrismaPromise<GetPullRequestAggregateType<T>>
 
   /**
@@ -1713,9 +1713,9 @@ export interface PullRequestDelegate<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
-    OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: PullRequestGroupByArgs['orderBy'] }
-      : { orderBy?: PullRequestGroupByArgs['orderBy'] },
+    OrderByArg extends Prisma.True extends HasSelectOrTake ?
+      { orderBy: PullRequestGroupByArgs['orderBy'] }
+    : { orderBy?: PullRequestGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
       Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>
     >,
@@ -1724,45 +1724,38 @@ export interface PullRequestDelegate<
     HavingFields extends Prisma.GetHavingFields<T['having']>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
     ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False,
-    InputErrors extends ByEmpty extends Prisma.True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends Prisma.False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-                ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
-          }[HavingFields]
-        : 'take' extends Prisma.Keys<T>
-          ? 'orderBy' extends Prisma.Keys<T>
-            ? ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields]
-            : 'Error: If you provide "take", you also need to provide "orderBy"'
-          : 'skip' extends Prisma.Keys<T>
-            ? 'orderBy' extends Prisma.Keys<T>
-              ? ByValid extends Prisma.True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "skip", you also need to provide "orderBy"'
-            : ByValid extends Prisma.True
-              ? {}
-              : {
-                  [P in OrderFields]: P extends ByFields
-                    ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                }[OrderFields],
+    InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.`
+    : HavingValid extends Prisma.False ?
+      {
+        [P in HavingFields]: P extends ByFields ? never
+        : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+        : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+      }[HavingFields]
+    : 'take' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "take", you also need to provide "orderBy"'
+    : 'skip' extends Prisma.Keys<T> ?
+      'orderBy' extends Prisma.Keys<T> ?
+        ByValid extends Prisma.True ?
+          {}
+        : {
+            [P in OrderFields]: P extends ByFields ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "skip", you also need to provide "orderBy"'
+    : ByValid extends Prisma.True ? {}
+    : {
+        [P in OrderFields]: P extends ByFields ? never
+        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+      }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, PullRequestGroupByArgs, OrderByArg> & InputErrors
+    args: Prisma.SubsetIntersection<T, PullRequestGroupByArgs, OrderByArg> & InputErrors,
   ): {} extends InputErrors ? GetPullRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /** Fields of the PullRequest model */
   readonly fields: PullRequestFieldRefs
@@ -1781,7 +1774,7 @@ export interface Prisma__PullRequestClient<
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
   repository<T extends Prisma.RepositoryDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.RepositoryDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.RepositoryDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__RepositoryClient<
     | runtime.Types.Result.GetResult<
         Prisma.$RepositoryPayload<ExtArgs>,
@@ -1795,7 +1788,7 @@ export interface Prisma__PullRequestClient<
     GlobalOmitOptions
   >
   author<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<
         Prisma.$UserPayload<ExtArgs>,
@@ -1809,7 +1802,7 @@ export interface Prisma__PullRequestClient<
     GlobalOmitOptions
   >
   comments<T extends Prisma.PullRequest$commentsArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.PullRequest$commentsArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.PullRequest$commentsArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$CommentPayload<ExtArgs>,
@@ -1828,7 +1821,7 @@ export interface Prisma__PullRequestClient<
    */
   then<TResult1 = T, TResult2 = never>(
     onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -1837,7 +1830,7 @@ export interface Prisma__PullRequestClient<
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
