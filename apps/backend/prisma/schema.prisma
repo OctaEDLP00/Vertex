@@ -25,6 +25,7 @@ model User {
   comments     Comment[]
   pullRequests PullRequest[]
   tokens       PersonalAccessToken[]
+  stars        Star[]
 
   @@map("users")
 }
@@ -58,6 +59,7 @@ model Repository {
   issues       Issue[]
   pullRequests PullRequest[]
   webhooks     Webhook[]
+  stars        Star[]
 
   // Garantiza que un mismo usuario no tenga dos repositorios con el mismo nombre
   @@unique([ownerId, name])
@@ -135,4 +137,17 @@ model Webhook {
   repository Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
 
   @@map("webhooks")
+}
+
+model Star {
+  id           String   @id @default(uuid())
+  userId       String
+  repositoryId String
+  createdAt    DateTime @default(now())
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  repository Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, repositoryId])
+  @@map("stars")
 }

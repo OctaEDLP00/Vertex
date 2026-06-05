@@ -5,6 +5,7 @@ import { PassportModule } from '@nestjs/passport'
 import { AuthController } from './auth.controller.js'
 import { AuthService } from './auth.service.js'
 import { JwtStrategy } from './jwt.strategy.js'
+import { ValidateController } from './validate.controller.js'
 
 type Unit =
   | 'Years'
@@ -51,7 +52,7 @@ type StringValue = `${number}` | `${number}${UnitAnyCase}` | `${number} ${UnitAn
       signOptions: { expiresIn: (process.env.JWT_EXPIRES_IN as StringValue) ?? '7d' },
     }),
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, ValidateController],
   providers: [AuthService, JwtStrategy],
   exports: [AuthService, JwtModule],
 })

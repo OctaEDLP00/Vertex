@@ -17,8 +17,8 @@ export function getFilePath(url: string): string {
 @Injectable()
 export class PrismaService extends PrismaClient {
   constructor() {
-    const connectionString = process.env.DATABASE_URL ?? './dev.db'
-    const pool = new Pool({ connectionString })
+    const filePath = getFilePath(process.env.DATABASE_URL || './dev.db')
+    const pool = new Pool({ connectionString: filePath })
     const adapter = new PrismaBetterSqlite3(pool)
     super({ adapter })
   }

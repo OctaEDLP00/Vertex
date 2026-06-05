@@ -36,8 +36,7 @@ export default defineConfig(
       parserOptions: {
         parser: ts.parser, // Procesa el TypeScript dentro del frontmatter
         extraFileExtensions: ['.astro'],
-        project: ['./tsconfig.json'],
-        tsconfigRootDir: import.meta.dirname,
+        project: ['./apps/frontend/tsconfig.json'],
       },
     },
     ...pluginAstro.configs['flat/recommended'],
@@ -50,13 +49,12 @@ export default defineConfig(
     languageOptions: {
       ecmaVersion: 2020,
       parserOptions: {
-        project: ['./tsconfig.json'],
-        tsconfigRootDir: import.meta.dirname,
+        project: ['./apps/backend/tsconfig.json'],
       },
     },
     plugins: {
       react: reactPlugin,
-      'react-hooks': reactHooks,
+      'react-hooks': reactHooks.meta,
       'react-refresh': reactRefresh,
       'jsx-a11y': jsxA11y,
     },

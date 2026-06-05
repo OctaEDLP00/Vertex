@@ -1,4 +1,4 @@
-import { IsEmail, IsEnum, IsOptional, IsString, MinLength } from 'class-validator'
+import { IsEmail, IsEnum, IsString, MinLength } from 'class-validator'
 
 export enum RegisterRole {
   ADMIN = 'ADMIN',
@@ -20,8 +20,4 @@ export class RegisterDto {
 
   @IsEnum(RegisterRole)
   role!: RegisterRole
-
-  @IsOptional()
-  @IsString()
-  institutionId?: string
 }
